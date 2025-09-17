@@ -1,6 +1,6 @@
 package Util;
 
-import View.Attendant;
+import Model.Quarto;
 
 import java.util.Scanner;
 
@@ -8,12 +8,12 @@ public class Validate {
 
     public static Scanner leia = new Scanner(System.in);
 
-    public static int ValidarInt(){
+    public static int ValidarInt() {
 
         int opcaoEscolhida = 0;
         boolean opcaoInvalida = true;
 
-        while(opcaoInvalida) {
+        while (opcaoInvalida) {
 
             System.out.println();
             System.out.print("[OPÇÃO]-> ");
@@ -31,7 +31,6 @@ public class Validate {
     }
 
 
-
     public static int verificacaoMenu() {
 
         int opcaoMenuEscolhida = 0;
@@ -46,7 +45,7 @@ public class Validate {
             try {
                 opcaoMenuEscolhida = Integer.parseInt(texto);
 
-                if (opcaoMenuEscolhida > 0 && opcaoMenuEscolhida < 6) {
+                if (opcaoMenuEscolhida > 0 && opcaoMenuEscolhida <= 6) {
                     opcaoInvalida = false;
 
                 } else {
@@ -57,8 +56,22 @@ public class Validate {
                 System.out.println("[ERRO:] " + erro.getMessage());
             }
 
-        }while(opcaoInvalida == true);
+        } while (opcaoInvalida == true);
         return opcaoMenuEscolhida;
+    }
+
+    public static Quarto.Tipo tipoQuarto() {
+        while (true) {
+            String entrada = leia.nextLine();
+
+            try {
+                String formatacao = entrada.replace(" ", "_").toUpperCase();
+                Quarto.Tipo tipoPedido = Quarto.Tipo.valueOf(formatacao);
+                return tipoPedido;
+            } catch (IllegalArgumentException erro) {
+                System.out.println("[ALGO DEU ERRADO]");
+            }
+        }
     }
 }
 

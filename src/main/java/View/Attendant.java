@@ -1,6 +1,6 @@
-package View;
+package src.main.java.View;
 
-import Util.Validate;
+import src.main.java.Util.*;
 
 public class Attendant {
 

@@ -1,16 +1,10 @@
-package Service;
+package src.main.java.Service;
 
-import View.Attendant;
+import src.main.java.View.Attendant;
 
 public class Stock {
 
-    public void gerenciarEstoque (Attendant attendant, int opcaoEscolhida){
-
-
-
+    public void gerenciarEstoque (int opcaoEscolhida){
 
     }
-
-
-
 }

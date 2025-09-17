@@ -1,6 +1,6 @@
-package Util;
+package src.main.java.Util;
 
-import View.Attendant;
+import src.main.java.View.Attendant;
 
 import java.util.Scanner;
 
@@ -46,7 +46,7 @@ public class Validate {
             try {
                 opcaoMenuEscolhida = Integer.parseInt(texto);
 
-                if (opcaoMenuEscolhida > 0 && opcaoMenuEscolhida < 6) {
+                if (opcaoMenuEscolhida > 0 && opcaoMenuEscolhida <= 6) {
                     opcaoInvalida = false;
 
                 } else {

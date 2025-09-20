@@ -5,7 +5,8 @@ import java.util.Date;
 import java.util.List;
 
 public class Reserva {
-    
+
+    private int id;
     private Hospede hospede;
     private Quarto quarto;
     private Date data_entrada;
@@ -13,17 +14,27 @@ public class Reserva {
     private List<Servico> servicos = new ArrayList<>();
     
     public Reserva() {
+        this.id = 0;
         this.hospede = null;
         this.quarto = null;
         this.data_entrada = null;
         this.data_saida = null;
     }
 
-    public Reserva(Hospede hospede, Quarto quarto, Date data_entrada, Date data_saida) {
+    public Reserva(int id, Hospede hospede, Quarto quarto, Date data_entrada, Date data_saida) {
+        this.id = id;
         this.hospede = hospede;
         this.quarto = quarto;
         this.data_entrada = data_entrada;
         this.data_saida = data_saida;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public Hospede getHospede() {
@@ -68,7 +79,7 @@ public class Reserva {
 
     @Override
     public String toString() {
-        return "Reserva | Hospede: " + hospede + " | Quarto: " + quarto + " | Data_entrada: " + data_entrada + " | Data_saida: "
+        return "Reserva | ID: " + id + " | Hospede: " + hospede + " | Quarto: " + quarto + " | Data_entrada: " + data_entrada + " | Data_saida: "
                 + data_saida + " | Serviços: " + servicos;
     }
 

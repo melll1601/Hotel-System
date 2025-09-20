@@ -2,11 +2,17 @@ package View;
 
 import java.util.Scanner;
 
+import Dao.HospedeDAO;
+import Dao.QuartoDAO;
+import Model.Hospede;
+import Model.Quarto;
 import Util.Validate;
 
 public class Attendant {
 
     public static Scanner leia = new Scanner(System.in);
+
+    // Menus de Cadastro
 
     public static String loginUsuario(){
 
@@ -126,4 +132,72 @@ public class Attendant {
         System.out.println("|    ---  Gabelm Hotel - Até Logo!   ---   |");
         System.out.println("|------------------------------------------|");
     }
+
+    // Métodos lógicos do Sistema
+
+    public static void cadastrarHospede() {
+        System.out.println(" ");
+        System.out.println("|------------------------------------------|");
+        System.out.println("|     ---   Gabelm Hotel Cadastro    ---   |");
+        System.out.println("|------------------------------------------|");
+        System.out.print("| -> Nome do Hóspede: ");
+        String nome = leia.nextLine();
+        System.out.print("| -> Documento (CPF ou RG): ");
+        String documento = leia.nextLine();
+        System.out.print("| -> Telefone (com DDD): ");
+        String telefone = leia.nextLine();
+
+        Dao.HospedeDAO.cadastrarHospede(nome, documento, telefone);
+    }
+
+    public static void cadastrarQuarto() {
+        System.out.println(" ");
+        System.out.println("|------------------------------------------|");
+        System.out.println("|     ---   Gabelm Hotel Cadastro    ---   |");
+        System.out.println("|------------------------------------------|");
+        System.out.print("| -> Tipo do Quarto (Simples, Luxo, etc): ");
+        String tipo = leia.nextLine();
+        System.out.print("| -> Preço da Diária: R$ ");
+        double preco = Validate.ValidarDouble();
+
+        Dao.QuartoDAO.cadastrarQuarto(tipo, preco);
+    }
+
+    public static void cadastrarReserva() {
+        System.out.println(" ");
+        System.out.println("|------------------------------------------|");
+        System.out.println("|     ---   Gabelm Hotel Cadastro    ---   |");
+        System.out.println("|------------------------------------------|");
+        System.out.print("| -> ID do Hóspede: ");
+        int idHospede = Validate.ValidarInt();
+        System.out.print("| -> ID do Quarto: ");
+        int idQuarto = Validate.ValidarInt();
+        System.out.print("| -> Data de Entrada: ");
+        String Entrada = leia.nextLine();
+        System.out.print("| -> Data de Saída: ");
+        String Saida = leia.nextLine();
+
+        java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("dd/MM/yyyy");
+        java.util.Date dataEntrada = null;
+        java.util.Date dataSaida = null;
+
+        try {
+            dataEntrada = sdf.parse(Entrada);
+            dataSaida = sdf.parse(Saida);
+        } catch (java.text.ParseException e) {
+            System.out.println("Erro: Formato de data inválido.");
+            return;
+        }
+
+        Hospede hospede = HospedeDAO.buscarPorId(idHospede);
+        Quarto quarto = QuartoDAO.buscarPorNumero(idQuarto);
+
+        if (hospede == null || quarto == null) {
+            System.out.println("Erro: Hóspede ou quarto não encontrado.");
+            return;
+        }
+
+        Dao.ReservaDAO.cadastrarReserva(hospede, quarto, dataEntrada, dataSaida);
+    }
+
 }

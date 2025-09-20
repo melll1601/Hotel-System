@@ -29,7 +29,30 @@ public class Stock {
         switch (opcaoEscolhida) {
         
             case 1:
-                Attendant.MenuCadastro();
+                int opcaoCadastro = Attendant.MenuCadastro();
+
+                switch (opcaoCadastro) {
+                    case 1:
+                        Attendant.cadastrarHospede();
+                        break;
+
+                    case 2:
+                        Attendant.cadastrarQuarto();
+                        break;
+
+                    case 3:
+                        Attendant.cadastrarReserva();
+                        break;
+
+                    case 0:
+                        System.out.println("Retornando ao Menu Principal...");
+                        break;
+
+                    default:
+                        System.out.println("Opção inválida! Tente novamente.");
+                        break;
+                }
+                
                 break;
 
             case 2:

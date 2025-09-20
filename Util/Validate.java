@@ -31,6 +31,25 @@ public class Validate {
     }
 
 
+    public static double ValidarDouble() {
+
+        double numero = 0;
+        boolean opcaoInvalida = true;
+
+        while (opcaoInvalida) {
+            System.out.print("[VALOR]-> ");
+            String texto = leia.nextLine();
+
+            try {
+                numero = Double.parseDouble(texto);
+                opcaoInvalida = false;
+            } catch (NumberFormatException erro) {
+                System.out.println("[Número decimal inválido, use ponto para casas decimais.]");
+            }
+        }
+        return numero;
+    }
+
 
     public static int verificacaoMenu() {
 

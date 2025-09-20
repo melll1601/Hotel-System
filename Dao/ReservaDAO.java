@@ -15,6 +15,7 @@ public class ReservaDAO {
         Reserva novaReserva = new Reserva(contadorId, hospede, quarto, dataEntrada, dataSaida);
         listaReservas.add(novaReserva);
         contadorId++;
-        System.out.println("✅ Sucesso: Reserva cadastrada!");
+        System.out.println("Sucesso: Reserva cadastrada!");
     }
+    
 }

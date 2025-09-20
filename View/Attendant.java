@@ -144,7 +144,7 @@ public class Attendant {
         String nome = leia.nextLine();
         System.out.print("| -> Documento (CPF ou RG): ");
         String documento = leia.nextLine();
-        System.out.print("| -> Telefone (com DDD): ");
+        System.out.print("| -> Telefone: ");
         String telefone = leia.nextLine();
 
         Dao.HospedeDAO.cadastrarHospede(nome, documento, telefone);
@@ -155,9 +155,9 @@ public class Attendant {
         System.out.println("|------------------------------------------|");
         System.out.println("|     ---   Gabelm Hotel Cadastro    ---   |");
         System.out.println("|------------------------------------------|");
-        System.out.print("| -> Tipo do Quarto (Simples, Luxo, etc): ");
+        System.out.print("| -> Tipo do Quarto (Simples, Luxo, Suite, Presidencial): ");
         String tipo = leia.nextLine();
-        System.out.print("| -> Preço da Diária: R$ ");
+        System.out.print("| -> Preço da Diária: ");
         double preco = Validate.ValidarDouble();
 
         Dao.QuartoDAO.cadastrarQuarto(tipo, preco);

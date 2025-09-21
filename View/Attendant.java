@@ -1,5 +1,6 @@
 package View;
 
+import java.util.List;
 import java.util.Scanner;
 
 import Dao.HospedeDAO;
@@ -198,6 +199,75 @@ public class Attendant {
         }
 
         Dao.ReservaDAO.cadastrarReserva(hospede, quarto, dataEntrada, dataSaida);
+    }
+
+    public static void listarHospedes() {
+        System.out.println(" ");
+        System.out.println("|------------------------------------------|");
+        System.out.println("|     ---   Gabelm Hotel Listagem    ---   |");
+        System.out.println("|------------------------------------------|");
+
+        List <Hospede> hospedes = HospedeDAO.listarHospedes();
+        if (hospedes.isEmpty()) {
+            System.out.println("|        Nenhum hóspede cadastrado!        |");
+        } else {
+            for (Hospede hospede : hospedes) {
+                System.out.println("| ID: " + hospede.getId() + 
+                                   " | Nome: " + hospede.getNome() + 
+                                   " | Documento: " + hospede.getDocumento() + 
+                                   " | Telefone: " + hospede.getTelefone() + 
+                                   " |");
+            }
+        }
+
+        System.out.println("|------------------------------------------|");
+
+    }
+
+    public static void listarQuartos() {
+        System.out.println(" ");
+        System.out.println("|------------------------------------------|");
+        System.out.println("|     ---   Gabelm Hotel Listagem    ---   |");
+        System.out.println("|------------------------------------------|");
+
+        List <Quarto> quartos = QuartoDAO.listarQuartos();
+        if (quartos.isEmpty()) {
+            System.out.println("|        Nenhum quarto cadastrado!         |");
+        } else {
+            for (Quarto quarto : quartos) {
+                System.out.println("| Número: " + quarto.getNumero() + 
+                                   " | Tipo: " + quarto.getTipo() + 
+                                   " | Preço: " + quarto.getPreco() + 
+                                   " |");
+            }
+        }
+
+        System.out.println("|------------------------------------------|");
+
+    }
+
+    public static void listarReservas() {
+        System.out.println(" ");
+        System.out.println("|------------------------------------------|");
+        System.out.println("|     ---   Gabelm Hotel Listagem    ---   |");
+        System.out.println("|------------------------------------------|");
+
+        List <Model.Reserva> reservas = Dao.ReservaDAO.listarReservas();
+        if (reservas.isEmpty()) {
+            System.out.println("|        Nenhuma reserva cadastrada!       |");
+        } else {
+            for (Model.Reserva reserva : reservas) {
+                System.out.println("| ID: " + reserva.getId() + 
+                                   " | Hóspede: " + reserva.getHospede().getNome() + 
+                                   " | Quarto: " + reserva.getQuarto().getNumero() + 
+                                   " | Entrada: " + new java.text.SimpleDateFormat("dd/MM/yyyy").format(reserva.getDataEntrada()) + 
+                                   " | Saída: " + new java.text.SimpleDateFormat("dd/MM/yyyy").format(reserva.getDataSaida()) + 
+                                   " |");
+            }
+        }
+
+        System.out.println("|------------------------------------------|");
+
     }
 
 }

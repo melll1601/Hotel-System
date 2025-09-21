@@ -2,6 +2,7 @@ package Dao;
 
 import Model.Hospede;
 import java.util.ArrayList;
+import java.util.List;
 
 public class HospedeDAO {
 
@@ -22,6 +23,10 @@ public class HospedeDAO {
             }
         }
         return null;
+    }
+
+    public static List<Hospede> listarHospedes() {
+        return listaHospedes;
     }
 
 }

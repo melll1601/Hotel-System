@@ -24,4 +24,8 @@ public class QuartoDAO {
         return null;
     }
 
+    public static ArrayList<Quarto> listarQuartos() {
+        return listaQuartos;
+    }
+
 }

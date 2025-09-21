@@ -56,7 +56,28 @@ public class Stock {
                 break;
 
             case 2:
-                Attendant.MenuListar();
+                int opcaoListar = Attendant.MenuListar();
+                switch (opcaoListar) {
+                    case 1:
+                        Attendant.listarHospedes();
+                        break;
+
+                    case 2:
+                        Attendant.listarQuartos();
+                        break;
+
+                    case 3:
+                        Attendant.listarReservas();
+                        break;
+
+                    case 0:
+                        System.out.println("Retornando ao Menu Principal...");
+                        break;
+
+                    default:
+                        System.out.println("Opção inválida! Tente novamente.");
+                        break;
+                }
                 break;
 
             case 3:

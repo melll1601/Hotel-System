@@ -17,5 +17,9 @@ public class ReservaDAO {
         contadorId++;
         System.out.println("Sucesso: Reserva cadastrada!");
     }
+
+    public static ArrayList<Reserva> listarReservas() {
+        return listaReservas;
+    }
     
 }

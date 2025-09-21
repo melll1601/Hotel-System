@@ -9,24 +9,24 @@ public class Reserva {
     private int id;
     private Hospede hospede;
     private Quarto quarto;
-    private Date data_entrada;
-    private Date data_saida;
+    private Date dataEntrada;
+    private Date dataSaida;
     private List<Servico> servicos = new ArrayList<>();
     
     public Reserva() {
         this.id = 0;
         this.hospede = null;
         this.quarto = null;
-        this.data_entrada = null;
-        this.data_saida = null;
+        this.dataEntrada = null;
+        this.dataSaida = null;
     }
 
-    public Reserva(int id, Hospede hospede, Quarto quarto, Date data_entrada, Date data_saida) {
+    public Reserva(int id, Hospede hospede, Quarto quarto, Date dataEntrada, Date dataSaida) {
         this.id = id;
         this.hospede = hospede;
         this.quarto = quarto;
-        this.data_entrada = data_entrada;
-        this.data_saida = data_saida;
+        this.dataEntrada = dataEntrada;
+        this.dataSaida = dataSaida;
     }
 
     public int getId() {
@@ -53,20 +53,20 @@ public class Reserva {
         this.quarto = quarto;
     }
 
-    public Date getData_entrada() {
-        return data_entrada;
+    public Date getDataEntrada() {
+        return dataEntrada;
     }
 
-    public void setData_entrada(Date data_entrada) {
-        this.data_entrada = data_entrada;
+    public void setDataEntrada(Date dataEntrada) {
+        this.dataEntrada = dataEntrada;
     }
 
-    public Date getData_saida() {
-        return data_saida;
+    public Date getDataSaida() {
+        return dataSaida;
     }
 
-    public void setData_saida(Date data_saida) {
-        this.data_saida = data_saida;
+    public void setDataSaida(Date dataSaida) {
+        this.dataSaida = dataSaida;
     }
 
     public List<Servico> getServicos() {
@@ -79,8 +79,8 @@ public class Reserva {
 
     @Override
     public String toString() {
-        return "Reserva | ID: " + id + " | Hospede: " + hospede + " | Quarto: " + quarto + " | Data_entrada: " + data_entrada + " | Data_saida: "
-                + data_saida + " | Serviços: " + servicos;
+        return "Reserva | ID: " + id + " | Hospede: " + hospede + " | Quarto: " + quarto + " | DataEntrada: " + dataEntrada + " | DataSaida: "
+                + dataSaida + " | Serviços: " + servicos;
     }
 
 }

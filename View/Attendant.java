@@ -102,10 +102,9 @@ public class Attendant {
         System.out.println("|------------------------------------------|");
         System.out.println("|    ---  Gabelm Hotel Cancelamento  ---   |");
         System.out.println("|------------------------------------------|");
-        System.out.print  ("|-- Digite o nome do Hospede: ");
+        System.out.print  ("|-- Digite o código da reserva: ");
 
-        String nomeHospede = leia.nextLine();
-        return nomeHospede;
+        return leia.nextLine();
     }
 
     public static void sairSistema(){
@@ -134,6 +133,33 @@ public class Attendant {
         Dao.HospedeDAO.cadastrarHospede(nome, documento, telefone);
     }
 
+    public static void editarHospede(Hospede hospede) {
+        System.out.println(" ");
+        System.out.println("|------------------------------------------|");
+        System.out.println("|     ---   Gabelm Hotel Edição     ---    |");
+        System.out.println("|------------------------------------------|");
+        System.out.print("| -> Nome do Hóspede (" + hospede.getNome() + "): ");
+        String nome = leia.nextLine();
+        System.out.print("| -> Documento (CPF ou RG) (" + hospede.getDocumento() + "): ");
+        String documento = leia.nextLine();
+        System.out.print("| -> Telefone (" + hospede.getTelefone() + "): ");
+        String telefone = leia.nextLine();
+
+        if (!nome.isEmpty()) {
+            hospede.setNome(nome);
+        }
+        if (!documento.isEmpty()) {
+            hospede.setDocumento(documento);
+        }
+        if (!telefone.isEmpty()) {
+            hospede.setTelefone(telefone);
+        }
+        
+        System.out.println("Sucesso: Dados do hóspede atualizados!");
+    }
+
+
+
     public static void cadastrarQuarto() {
         System.out.println(" ");
         System.out.println("|------------------------------------------|");
@@ -160,6 +186,8 @@ public class Attendant {
         String Entrada = leia.nextLine();
         System.out.print("| -> Data de Saída: ");
         String Saida = leia.nextLine();
+        System.out.print("| -> Código da Reserva: ");
+        String codigoReserva = leia.nextLine();
 
         java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("dd/MM/yyyy");
         java.util.Date dataEntrada = null;
@@ -181,7 +209,7 @@ public class Attendant {
             return;
         }
 
-        Dao.ReservaDAO.cadastrarReserva(hospede, quarto, dataEntrada, dataSaida);
+        Dao.ReservaDAO.cadastrarReserva(hospede, quarto, dataEntrada, dataSaida, codigoReserva);
     }
 
     public static void listarHospedes() {
@@ -245,6 +273,7 @@ public class Attendant {
                                    " | Quarto: " + reserva.getQuarto().getNumero() + 
                                    " | Entrada: " + new java.text.SimpleDateFormat("dd/MM/yyyy").format(reserva.getDataEntrada()) + 
                                    " | Saída: " + new java.text.SimpleDateFormat("dd/MM/yyyy").format(reserva.getDataSaida()) + 
+                                   " | Código Reserva: " + reserva.getCodigoReserva() + 
                                    " |");
             }
         }

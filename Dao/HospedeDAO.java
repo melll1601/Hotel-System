@@ -49,4 +49,22 @@ public class HospedeDAO {
             Attendant.naoEncontrado();
         }            
     }
+
+    public static void editarDados(){
+
+        int idHospede = Attendant.editarDados();
+        boolean editado = false;
+
+         for (Hospede hospede : listarHospedes()) {
+        if (hospede.getId() == idHospede) {
+            Attendant.editarHospede(hospede); 
+            editado = true;
+            break; 
+        }
+        }
+
+        if (!editado) {
+        System.out.println("Erro: Hóspede não encontrado.");
+        }
+    }
 }

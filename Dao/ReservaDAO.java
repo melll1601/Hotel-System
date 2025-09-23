@@ -13,8 +13,8 @@ public class ReservaDAO {
     private static ArrayList<Reserva> listaReservas = new ArrayList<>();
     private static int contadorId = 1;
 
-    public static void cadastrarReserva(Hospede hospede, Quarto quarto, Date dataEntrada, Date dataSaida) {
-        Reserva novaReserva = new Reserva(contadorId, hospede, quarto, dataEntrada, dataSaida);
+    public static void cadastrarReserva(Hospede hospede, Quarto quarto, Date dataEntrada, Date dataSaida, String codigoReserva) {
+        Reserva novaReserva = new Reserva(contadorId, hospede, quarto, dataEntrada, dataSaida, codigoReserva);
         listaReservas.add(novaReserva);
         contadorId++;
         System.out.println("Sucesso: Reserva cadastrada!");
@@ -44,12 +44,12 @@ public class ReservaDAO {
     }
 
     public static void excluirReserva(){
-        String nomeHospedeExcluir = Attendant.cancelarReserva();
-		boolean removido = false;
+            String codigoRemover = Attendant.cancelarReserva();
+			boolean removido = false;
 
-		for (Reserva reserva : ReservaDAO.listarReservas()) {
-                if(reserva.getHospede().getNome().equalsIgnoreCase(nomeHospedeExcluir)){
-    				listarReservas().remove(nomeHospedeExcluir);
+			for (int indice = 0; indice < listarReservas().size(); indice++) {
+				if (listarReservas().get(indice).getCodigoReserva().equalsIgnoreCase(codigoRemover)) {
+					listarReservas().remove(indice);
 					removido = true;
 				}
 
@@ -58,7 +58,7 @@ public class ReservaDAO {
 				} else {
 					Attendant.naoEncontrado();
 				}
-		}
+			}
 	}
 }
     

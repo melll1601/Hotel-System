@@ -11,6 +11,7 @@ public class Reserva {
     private Quarto quarto;
     private Date dataEntrada;
     private Date dataSaida;
+    private String codigoReserva;
     private List<Servico> servicos = new ArrayList<>();
     
     public Reserva() {
@@ -19,6 +20,7 @@ public class Reserva {
         this.quarto = null;
         this.dataEntrada = null;
         this.dataSaida = null;
+        this.codigoReserva = null;
     }
 
     public Reserva(int id, Hospede hospede, Quarto quarto, Date dataEntrada, Date dataSaida) {
@@ -27,6 +29,15 @@ public class Reserva {
         this.quarto = quarto;
         this.dataEntrada = dataEntrada;
         this.dataSaida = dataSaida;
+    }
+
+    public Reserva(int id, Hospede hospede, Quarto quarto, Date dataEntrada, Date dataSaida, String codigoReserva) {
+        this.id = id;
+        this.hospede = hospede;
+        this.quarto = quarto;
+        this.dataEntrada = dataEntrada;
+        this.dataSaida = dataSaida;
+        this.codigoReserva = codigoReserva;
     }
 
     public int getId() {
@@ -77,10 +88,19 @@ public class Reserva {
         this.servicos = servicos;
     }
 
+        public String getCodigoReserva() {
+        return codigoReserva;
+    }
+
+    public void setCodigoReserva(String codigoReserva) {
+        this.codigoReserva = codigoReserva;
+    }
+    
+
     @Override
     public String toString() {
         return "Reserva | ID: " + id + " | Hospede: " + hospede + " | Quarto: " + quarto + " | DataEntrada: " + dataEntrada + " | DataSaida: "
-                + dataSaida + " | Serviços: " + servicos;
+                + dataSaida + " | Serviços: " + servicos + " | Código da Reserva: " + codigoReserva + " |";
     }
 
 }

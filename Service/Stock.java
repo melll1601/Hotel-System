@@ -93,7 +93,7 @@ public class Stock {
             
 
             case 4:
-                Attendant.editarDados();
+                HospedeDAO.editarDados();
                 break;
 
             case 5:

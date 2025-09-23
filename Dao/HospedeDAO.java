@@ -1,6 +1,8 @@
 package Dao;
 
 import Model.Hospede;
+import View.Attendant;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,4 +31,22 @@ public class HospedeDAO {
         return listaHospedes;
     }
 
+    public static void pesquisarHospede(){
+
+        String nomePesquisa = Attendant.pesquisarNome();
+        boolean pesquisado = false;
+
+        for(Hospede hospede : HospedeDAO.listarHospedes()){
+
+            if(hospede.getNome().equalsIgnoreCase(nomePesquisa)){
+                System.out.println("[RESULTADO DA PESQUISA]: " + hospede);
+
+                pesquisado = true;
+            }
+        }
+
+        if(!pesquisado){
+            Attendant.naoEncontrado();
+        }            
+    }
 }

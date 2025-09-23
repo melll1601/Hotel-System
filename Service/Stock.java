@@ -8,21 +8,13 @@ import Model.Quarto;
 import Model.Reserva;
 import Model.Servico;
 
+import Dao.HospedeDAO;
+import Dao.QuartoDAO;
+import Dao.ReservaDAO;
 import View.Attendant;
 
 public class Stock {
 
-    List<Hospede> hospedes;
-    List<Quarto> quartos;
-    List<Reserva> reservas;
-    List<Servico> servicos;
-
-    public Stock() {
-        hospedes = new ArrayList<>();
-        quartos = new ArrayList<>();
-        reservas = new ArrayList<>();
-        servicos = new ArrayList<>();
-    }
 
     public void gerenciarEstoque (Attendant attendant, int opcaoEscolhida){
 
@@ -81,15 +73,31 @@ public class Stock {
                 break;
 
             case 3:
-                Attendant.menuPesquisar();
-                break;
+                int opcaoPesquisar = Attendant.menuPesquisar();
+
+                switch(opcaoPesquisar){
+
+                    case 1:
+                        HospedeDAO.pesquisarHospede();
+                        break;
+
+                    case 2: 
+                        QuartoDAO.pesquisarQuarto();
+                        break;
+                    case 3:
+                        ReservaDAO.pesquisarNome();
+                        break;
+                }
+
+            break;
+            
 
             case 4:
                 Attendant.editarDados();
                 break;
 
             case 5:
-                Attendant.cancelarReserva();
+                ReservaDAO.excluirReserva();
                 break;
 
             case 6:

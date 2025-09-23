@@ -21,6 +21,12 @@ public class Hospede {
         this.telefone = telefone;
     }
 
+        public Hospede(String nome, String documento, String telefone) {
+        this.nome = nome;
+        this.documento = documento;
+        this.telefone = telefone;
+    }
+
     public int getId() {
         return id;
     }
@@ -56,6 +62,6 @@ public class Hospede {
     @Override
     public String toString() {
         System.out.println(" ");
-        return "Hospede | ID: " + id + " Nome: " + nome + " Documento: " + documento + " Telefone: " + telefone;
+        return "Hospede | ID: " + id + " | " + " Nome: " + nome + " | " + " Documento: " + documento + " | " + " Telefone: " + telefone + " | " ;
     }
 }

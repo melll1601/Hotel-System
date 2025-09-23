@@ -79,23 +79,6 @@ public class Attendant {
         return opcao;
     }
 
-    public static int menuPesquisar(){
-
-        System.out.println(" ");
-
-        System.out.println("|------------------------------------------|");
-        System.out.println("|    ---  Gabelm Hotel Pesquisa    ---     |");
-        System.out.println("|------------------------------------------|");
-        System.out.println("| 1 - Pesq. Hóspede  | 2 - Pesq. Quarto    |");
-        System.out.println("|------------------------------------------|");
-        System.out.println("| 3 - Pesq. Reserva  | 0 - Voltar          |");
-        System.out.println("|------------------------------------------|");
-
-        int opcao = Validate.ValidarInt();
-        return opcao;
-
-    }
-
 
     public static int editarDados(){
 
@@ -112,17 +95,17 @@ public class Attendant {
     }
 
 
-    public static int cancelarReserva(){
+    public static String cancelarReserva(){
 
         System.out.println(" ");
 
         System.out.println("|------------------------------------------|");
         System.out.println("|    ---  Gabelm Hotel Cancelamento  ---   |");
         System.out.println("|------------------------------------------|");
-        System.out.print  ("|-- Digite o ID da reserva: ");
+        System.out.print  ("|-- Digite o nome do Hospede: ");
 
-        int opcao = Validate.ValidarInt();
-        return opcao;
+        String nomeHospede = leia.nextLine();
+        return nomeHospede;
     }
 
     public static void sairSistema(){
@@ -270,4 +253,76 @@ public class Attendant {
 
     }
 
-}
+    public static int menuPesquisar(){
+
+        System.out.println(" ");
+
+        System.out.println("|------------------------------------------|");
+        System.out.println("|    ---  Gabelm Hotel Pesquisa    ---     |");
+        System.out.println("|------------------------------------------|");
+        System.out.println("| 1 - Pesq. Hóspede  | 2 - Pesq. Quarto    |");
+        System.out.println("|------------------------------------------|");
+        System.out.println("| 3 - Pesq. Reserva  | 0 - Voltar          |");
+        System.out.println("|------------------------------------------|");
+
+        int opcao = Validate.ValidarInt();
+        return opcao;
+
+    }
+
+    public static String pesquisarNome(){
+
+        System.out.println(" ");
+
+        System.out.println("|------------------------------------------|");
+        System.out.println("|    ---  Gabelm Hotel Pesquisa    ---     |");
+        System.out.println("|------------------------------------------|");
+        System.out.print  ("|    - Digite o nome: ");
+
+        String nomeHospede = leia.nextLine();
+        return nomeHospede;
+
+    }
+
+    public static void naoEncontrado(){
+
+        System.out.println(" ");
+        System.out.println("[NÃO FOI POSSÍVEL ENCONTRAR]");
+    }
+
+    public static String pesquisarTipo(){
+
+        System.out.println(" ");
+
+        System.out.println("|------------------------------------------|");
+        System.out.println("|    ---  Gabelm Hotel Pesquisa    ---     |");
+        System.out.println("|------------------------------------------|");
+        System.out.print  ("|    - Digite o tipo: ");
+
+        String tipoQuarto = leia.nextLine();
+        return tipoQuarto;
+
+    }
+
+    public static String pesquisarNomeReserva(){
+
+        System.out.println(" ");
+
+        System.out.println("|------------------------------------------|");
+        System.out.println("|    ---  Gabelm Hotel Pesquisa    ---     |");
+        System.out.println("|------------------------------------------|");
+        System.out.print  ("|    - Digite o nome: ");
+
+        String nomeReserva = leia.nextLine();
+        return nomeReserva;
+    }
+
+    public static void reservaExcluida(){
+        System.out.println(" ");
+        System.out.println("[RESERVA EXCLUÍDA]");
+    }
+
+
+
+
+}   

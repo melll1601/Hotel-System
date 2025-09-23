@@ -1,6 +1,9 @@
 package Dao;
 
+import Model.Hospede;
 import Model.Quarto;
+import View.Attendant;
+
 import java.util.ArrayList;
 
 public class QuartoDAO {
@@ -26,6 +29,25 @@ public class QuartoDAO {
 
     public static ArrayList<Quarto> listarQuartos() {
         return listaQuartos;
+    }
+
+    public static void pesquisarQuarto(){
+
+        String tipoPesquisa = Attendant.pesquisarTipo();
+        boolean pesquisado = false;
+
+        for(Quarto quarto : QuartoDAO.listarQuartos()){
+
+            if(quarto.getTipo().equalsIgnoreCase(tipoPesquisa)){
+                System.out.println("[RESULTADO DA PESQUISA]: " + quarto);
+
+                pesquisado = true;
+            }
+        }
+
+        if(!pesquisado){
+            Attendant.naoEncontrado();
+        }            
     }
 
 }

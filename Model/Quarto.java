@@ -45,7 +45,7 @@ public class Quarto {
     @Override
     public String toString() {
         System.out.println(" ");
-        return "Quarto | Número: " + numero + " Tipo: " + tipo + " Preço: " + preco;
+        return "Quarto | Número: " + numero + " | " + " Tipo: " + tipo  + " | " +" Preço: " + preco + " | " ;
     }
 
 }

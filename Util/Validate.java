@@ -65,7 +65,7 @@ public class Validate {
             try {
                 opcaoMenuEscolhida = Integer.parseInt(texto);
 
-                if (opcaoMenuEscolhida > 0 && opcaoMenuEscolhida < 6) {
+                if (opcaoMenuEscolhida > 0 && opcaoMenuEscolhida < 7) {
                     opcaoInvalida = false;
 
                 } else {

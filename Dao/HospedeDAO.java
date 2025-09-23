@@ -6,6 +6,8 @@ import View.Attendant;
 import java.util.ArrayList;
 import java.util.List;
 
+import Controller.HospedeController;
+
 public class HospedeDAO {
 
     private static ArrayList<Hospede> listaHospedes = new ArrayList<>();
@@ -57,7 +59,7 @@ public class HospedeDAO {
 
          for (Hospede hospede : listarHospedes()) {
         if (hospede.getId() == idHospede) {
-            Attendant.editarHospede(hospede); 
+            HospedeController.editarHospede(hospede); 
             editado = true;
             break; 
         }

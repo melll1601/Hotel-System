@@ -118,168 +118,26 @@ public class Attendant {
 
     // Métodos lógicos do Sistema
 
-    public static void cadastrarHospede() {
+    public static void tituloCadastrar() {
         System.out.println(" ");
         System.out.println("|------------------------------------------|");
         System.out.println("|     ---   Gabelm Hotel Cadastro    ---   |");
         System.out.println("|------------------------------------------|");
-        System.out.print("| -> Nome do Hóspede: ");
-        String nome = leia.nextLine();
-        System.out.print("| -> Documento (CPF ou RG): ");
-        String documento = leia.nextLine();
-        System.out.print("| -> Telefone: ");
-        String telefone = leia.nextLine();
-
-        Dao.HospedeDAO.cadastrarHospede(nome, documento, telefone);
     }
 
-    public static void editarHospede(Hospede hospede) {
+    public static void tituloEditar(){
         System.out.println(" ");
         System.out.println("|------------------------------------------|");
         System.out.println("|     ---   Gabelm Hotel Edição     ---    |");
         System.out.println("|------------------------------------------|");
-        System.out.print("| -> Nome do Hóspede (" + hospede.getNome() + "): ");
-        String nome = leia.nextLine();
-        System.out.print("| -> Documento (CPF ou RG) (" + hospede.getDocumento() + "): ");
-        String documento = leia.nextLine();
-        System.out.print("| -> Telefone (" + hospede.getTelefone() + "): ");
-        String telefone = leia.nextLine();
-
-        if (!nome.isEmpty()) {
-            hospede.setNome(nome);
-        }
-        if (!documento.isEmpty()) {
-            hospede.setDocumento(documento);
-        }
-        if (!telefone.isEmpty()) {
-            hospede.setTelefone(telefone);
-        }
-        
-        System.out.println("Sucesso: Dados do hóspede atualizados!");
     }
 
 
-
-    public static void cadastrarQuarto() {
-        System.out.println(" ");
-        System.out.println("|------------------------------------------|");
-        System.out.println("|     ---   Gabelm Hotel Cadastro    ---   |");
-        System.out.println("|------------------------------------------|");
-        System.out.print("| -> Tipo do Quarto (Simples, Luxo, Suite, Presidencial): ");
-        String tipo = leia.nextLine();
-        System.out.print("| -> Preço da Diária: ");
-        double preco = Validate.ValidarDouble();
-
-        Dao.QuartoDAO.cadastrarQuarto(tipo, preco);
-    }
-
-    public static void cadastrarReserva() {
-        System.out.println(" ");
-        System.out.println("|------------------------------------------|");
-        System.out.println("|     ---   Gabelm Hotel Cadastro    ---   |");
-        System.out.println("|------------------------------------------|");
-        System.out.print("| -> ID do Hóspede: ");
-        int idHospede = Validate.ValidarInt();
-        System.out.print("| -> ID do Quarto: ");
-        int idQuarto = Validate.ValidarInt();
-        System.out.print("| -> Data de Entrada: ");
-        String Entrada = leia.nextLine();
-        System.out.print("| -> Data de Saída: ");
-        String Saida = leia.nextLine();
-        System.out.print("| -> Código da Reserva: ");
-        String codigoReserva = leia.nextLine();
-
-        java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("dd/MM/yyyy");
-        java.util.Date dataEntrada = null;
-        java.util.Date dataSaida = null;
-
-        try {
-            dataEntrada = sdf.parse(Entrada);
-            dataSaida = sdf.parse(Saida);
-        } catch (java.text.ParseException e) {
-            System.out.println("Erro: Formato de data inválido.");
-            return;
-        }
-
-        Hospede hospede = HospedeDAO.buscarPorId(idHospede);
-        Quarto quarto = QuartoDAO.buscarPorNumero(idQuarto);
-
-        if (hospede == null || quarto == null) {
-            System.out.println("Erro: Hóspede ou quarto não encontrado.");
-            return;
-        }
-
-        Dao.ReservaDAO.cadastrarReserva(hospede, quarto, dataEntrada, dataSaida, codigoReserva);
-    }
-
-    public static void listarHospedes() {
+    public static void tituloListar() {
         System.out.println(" ");
         System.out.println("|------------------------------------------|");
         System.out.println("|     ---   Gabelm Hotel Listagem    ---   |");
         System.out.println("|------------------------------------------|");
-
-        List <Hospede> hospedes = HospedeDAO.listarHospedes();
-        if (hospedes.isEmpty()) {
-            System.out.println("|        Nenhum hóspede cadastrado!        |");
-        } else {
-            for (Hospede hospede : hospedes) {
-                System.out.println("| ID: " + hospede.getId() + 
-                                   " | Nome: " + hospede.getNome() + 
-                                   " | Documento: " + hospede.getDocumento() + 
-                                   " | Telefone: " + hospede.getTelefone() + 
-                                   " |");
-            }
-        }
-
-        System.out.println("|------------------------------------------|");
-
-    }
-
-    public static void listarQuartos() {
-        System.out.println(" ");
-        System.out.println("|------------------------------------------|");
-        System.out.println("|     ---   Gabelm Hotel Listagem    ---   |");
-        System.out.println("|------------------------------------------|");
-
-        List <Quarto> quartos = QuartoDAO.listarQuartos();
-        if (quartos.isEmpty()) {
-            System.out.println("|        Nenhum quarto cadastrado!         |");
-        } else {
-            for (Quarto quarto : quartos) {
-                System.out.println("| Número: " + quarto.getNumero() + 
-                                   " | Tipo: " + quarto.getTipo() + 
-                                   " | Preço: " + quarto.getPreco() + 
-                                   " |");
-            }
-        }
-
-        System.out.println("|------------------------------------------|");
-
-    }
-
-    public static void listarReservas() {
-        System.out.println(" ");
-        System.out.println("|------------------------------------------|");
-        System.out.println("|     ---   Gabelm Hotel Listagem    ---   |");
-        System.out.println("|------------------------------------------|");
-
-        List <Model.Reserva> reservas = Dao.ReservaDAO.listarReservas();
-        if (reservas.isEmpty()) {
-            System.out.println("|        Nenhuma reserva cadastrada!       |");
-        } else {
-            for (Model.Reserva reserva : reservas) {
-                System.out.println("| ID: " + reserva.getId() + 
-                                   " | Hóspede: " + reserva.getHospede().getNome() + 
-                                   " | Quarto: " + reserva.getQuarto().getNumero() + 
-                                   " | Entrada: " + new java.text.SimpleDateFormat("dd/MM/yyyy").format(reserva.getDataEntrada()) + 
-                                   " | Saída: " + new java.text.SimpleDateFormat("dd/MM/yyyy").format(reserva.getDataSaida()) + 
-                                   " | Código Reserva: " + reserva.getCodigoReserva() + 
-                                   " |");
-            }
-        }
-
-        System.out.println("|------------------------------------------|");
-
     }
 
     public static int menuPesquisar(){
@@ -349,6 +207,16 @@ public class Attendant {
     public static void reservaExcluida(){
         System.out.println(" ");
         System.out.println("[RESERVA EXCLUÍDA]");
+    }
+
+    public static void retornarMenu(){
+        System.out.println(" ");
+        System.out.println("[RETORNANDO AO MENU PRINCIPAL...]");
+    }
+
+    public static void opcaoInvalida(){
+        System.out.println(" ");
+        System.out.println("[OPÇÃO INVÁLIDA! TENTE NOVAMENTE.]");
     }
 
 

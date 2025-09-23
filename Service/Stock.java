@@ -1,8 +1,12 @@
 package Service;
 
+import java.lang.ModuleLayer.Controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import Controller.HospedeController;
+import Controller.QuartoController;
+import Controller.ReservaController;
 import Model.Hospede;
 import Model.Quarto;
 import Model.Reserva;
@@ -12,6 +16,8 @@ import Dao.HospedeDAO;
 import Dao.QuartoDAO;
 import Dao.ReservaDAO;
 import View.Attendant;
+
+
 
 public class Stock {
 
@@ -25,23 +31,23 @@ public class Stock {
 
                 switch (opcaoCadastro) {
                     case 1:
-                        Attendant.cadastrarHospede();
+                        HospedeController.cadastrarHospede();
                         break;
 
                     case 2:
-                        Attendant.cadastrarQuarto();
+                        QuartoController.cadastrarQuarto();
                         break;
 
                     case 3:
-                        Attendant.cadastrarReserva();
+                        ReservaController.cadastrarReserva();
                         break;
 
                     case 0:
-                        System.out.println("Retornando ao Menu Principal...");
+                        Attendant.retornarMenu();
                         break;
 
                     default:
-                        System.out.println("Opção inválida! Tente novamente.");
+                        Attendant.opcaoInvalida();
                         break;
                 }
                 
@@ -51,23 +57,23 @@ public class Stock {
                 int opcaoListar = Attendant.MenuListar();
                 switch (opcaoListar) {
                     case 1:
-                        Attendant.listarHospedes();
+                        HospedeController.listarHospedes();
                         break;
 
                     case 2:
-                        Attendant.listarQuartos();
+                        QuartoController.listarQuartos();
                         break;
 
                     case 3:
-                        Attendant.listarReservas();
+                        ReservaController.listarReservas();
                         break;
 
                     case 0:
-                        System.out.println("Retornando ao Menu Principal...");
+                        Attendant.retornarMenu();
                         break;
 
                     default:
-                        System.out.println("Opção inválida! Tente novamente.");
+                        Attendant.opcaoInvalida();
                         break;
                 }
                 break;
@@ -80,7 +86,6 @@ public class Stock {
                     case 1:
                         HospedeDAO.pesquisarHospede();
                         break;
-
                     case 2: 
                         QuartoDAO.pesquisarQuarto();
                         break;
@@ -91,7 +96,6 @@ public class Stock {
 
             break;
             
-
             case 4:
                 HospedeDAO.editarDados();
                 break;

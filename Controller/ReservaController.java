@@ -76,7 +76,55 @@ public class ReservaController {
 
     }
 
+    public static void adicionarServico(int idReserva, int opcaoServico) {
+        Reserva reserva = ReservaDAO.buscarPorId(idReserva);
+        if (reserva == null) {
+                System.out.println("Reserva não encontrada.");
+                return;
+            }
 
+            Servico servico = null;
 
+            switch (opcaoServico) {
+                case 1:
+                    servico = new Servico("Café da Manhã", 20.0);
+                    break;
+                case 2:
+                    servico = new Servico("Almoço", 50.0);
+                    break;
+                case 3:
+                    servico = new Servico("Jantar", 70.0);
+                    break;
+                case 4:
+                    servico = new Servico("Serviço de Quarto", 30.0);
+                    break;
+                case 5:
+                    servico = new Servico("Lavanderia", 40.0);
+                    break;
+                default:
+                    System.out.println("Opção de serviço inválida.");
+                    return;
+            }
+
+            reserva.getServicos().add(servico);
+            System.out.println("Serviço adicionado com sucesso.");
+        }
+
+    public static void listarServicos(int idReserva) {
+        Reserva reserva = ReservaDAO.buscarPorId(idReserva);
+        if (reserva == null) {
+            System.out.println("Reserva não encontrada.");
+            return;
+        }
+
+        if (reserva.getServicos().isEmpty()) {
+            System.out.println("Nenhum serviço adicionado.");
+        } else {
+            System.out.println("Serviços adicionados:");
+            for (Servico servico : reserva.getServicos()) {
+                System.out.println(servico);
+            }
+        }
+    }
 
 }

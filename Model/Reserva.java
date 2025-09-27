@@ -95,7 +95,25 @@ public class Reserva {
     public void setCodigoReserva(String codigoReserva) {
         this.codigoReserva = codigoReserva;
     }
-    
+
+    public void adicionarServico(Servico servico) {
+        this.servicos.add(servico);
+    }
+
+    public void removerServico(Servico servico) {
+        this.servicos.remove(servico);
+    }
+
+    public void listarServicos() {
+        if (servicos.isEmpty()) {
+            System.out.println("Nenhum serviço adicionado.");
+        } else {
+            System.out.println("Serviços adicionados:");
+            for (Servico servico : servicos) {
+                System.out.println(servico);
+            }
+        }
+    }
 
     @Override
     public String toString() {

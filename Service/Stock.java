@@ -105,6 +105,33 @@ public class Stock {
                 break;
 
             case 6:
+                int opcaoReserva = Attendant.menuServico();
+
+                switch(opcaoReserva){
+
+                    case 1:
+                        int idReserva = Attendant.pedirIdReserva();
+                        int opcaoServico = Attendant.menuTipoServico();
+                        ReservaController.adicionarServico(idReserva, opcaoServico);
+                        break;
+
+                    case 2:
+                        idReserva = Attendant.pedirIdReserva();
+                        ReservaController.listarServicos(idReserva);
+                        break;
+
+                    case 0:
+                        Attendant.retornarMenu();
+                        break;
+
+                    default:
+                        Attendant.opcaoInvalida();
+                        break;
+                }
+
+                break;
+
+            case 0:
                 Attendant.sairSistema();
                 break;
 

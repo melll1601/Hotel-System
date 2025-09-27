@@ -28,24 +28,26 @@ public class Attendant {
 
 
 
-    public static int MenuPrincipal(){
+public static int MenuPrincipal(){
 
-        System.out.println(" ");
+    System.out.println(" ");
 
-        System.out.println("|------------------------------------------|");
-        System.out.println("|     ---       Gabelm Hotel      ---      |");
-        System.out.println("|------------------------------------------|");
-        System.out.println("| 1 - Cadastros      | 2 - Listagem        |");
-        System.out.println("|------------------------------------------|");
-        System.out.println("| 3 - Pesquisar      | 4 - Editar          |");
-        System.out.println("|------------------------------------------|");
-        System.out.println("| 5 - Cancelar       | 6 - Sair            |");
-        System.out.println("|------------------------------------------|");
+    System.out.println("|------------------------------------------|");
+    System.out.println("|     ---       Gabelm Hotel      ---      |");
+    System.out.println("|------------------------------------------|");
+    System.out.println("| 1 - Cadastros      | 2 - Listagem        |");
+    System.out.println("|------------------------------------------|");
+    System.out.println("| 3 - Pesquisar      | 4 - Editar          |");
+    System.out.println("|------------------------------------------|");
+    System.out.println("| 5 - Cancelar       | 6 - Reservas        |");
+    System.out.println("|------------------------------------------|");
+    System.out.println("| 0 - Sair                                 |");
+    System.out.println("|------------------------------------------|");
 
+    int opcaoMenuPrincipal = Validate.verificacaoMenu();
+    return opcaoMenuPrincipal;
+}
 
-        int opcaoMenuPrincipal = Validate.verificacaoMenu();
-        return opcaoMenuPrincipal;
-    }
 
     public static int MenuCadastro(){
 
@@ -219,7 +221,55 @@ public class Attendant {
         System.out.println("[OPÇÃO INVÁLIDA! TENTE NOVAMENTE.]");
     }
 
+    public static int menuServico(){
+
+        System.out.println(" ");
+
+        System.out.println("|----------------------------------------------|");
+        System.out.println("|      ---  Gabelm Hotel Serviços    ---       |");
+        System.out.println("|----------------------------------------------|");
+        System.out.println("| 1 - Adicionar Serviço | 2 - Listar Serviços  |");
+        System.out.println("|----------------------------------------------|");
+        System.out.println("| 0 - Voltar            |                      |");
+        System.out.println("|----------------------------------------------|");
+        
+
+        int opcao = Validate.ValidarInt();
+        return opcao;
+
+    }
+
+    public static int pedirIdReserva(){
+
+        System.out.println(" ");
+
+        System.out.println("|------------------------------------------|");
+        System.out.println("|    ---  Gabelm Hotel Serviços    ---     |");
+        System.out.println("|------------------------------------------|");
+        System.out.print  ("|-- Digite o ID da reserva: ");
+
+        int idReserva = Validate.ValidarInt();
+        return idReserva;
+    }
+
+    public static int menuTipoServico(){
+
+        System.out.println(" ");
+
+        System.out.println("|----------------------------------------------|");
+        System.out.println("|      ---  Gabelm Hotel Serviços    ---       |");
+        System.out.println("|----------------------------------------------|");
+        System.out.println("| 1 - Café da Manhã     | 2 - Almoço           |");
+        System.out.println("|----------------------------------------------|");
+        System.out.println("| 3 - Jantar            | 4 - Room Service     |");
+        System.out.println("|----------------------------------------------|");
+        System.out.println("| 5 - Lavanderia        | 0 - Voltar           |");
+        System.out.println("|----------------------------------------------|");
 
 
+        int opcao = Validate.ValidarInt();
+        return opcao;
+
+    }
 
 }   

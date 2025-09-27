@@ -60,6 +60,15 @@ public class ReservaDAO {
 				}
 			}
 	}
+
+    public static Reserva buscarPorId(int id) {
+        for (Reserva reserva : listaReservas) {
+            if (reserva.getId() == id) {
+                return reserva;
+            }
+        }
+        return null;
+    }
 }
     
 

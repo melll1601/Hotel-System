@@ -82,5 +82,56 @@ public class HospedeDAO {
         return hospedes;
     }
 
+    public static void editarHospede(Hospede hospede) throws SQLException {
+        String query = """
+                UPDATE hospede
+                SET nome = ?, documento = ?, telefone = ?
+                WHERE id = ?
+                """;
+
+        try (Connection conn = Conexão.conectar();
+             PreparedStatement stmt = conn.prepareStatement(query)) {
+
+            stmt.setString(1, hospede.getNome());
+            stmt.setString(2, hospede.getDocumento());
+            stmt.setString(3, hospede.getTelefone());
+            stmt.setInt(4, hospede.getId());
+            int rowsUpdated = stmt.executeUpdate();
+
+            if (rowsUpdated > 0) {
+                System.out.println("Hóspede atualizado com sucesso!");
+            } else {
+                System.out.println("Nenhum hóspede encontrado com o ID fornecido.");
+            }
+
+        } catch (SQLException erro) {
+            erro.printStackTrace();
+        }
+    }
+
+    public static Hospede pesqHospedesPorId(int id) throws SQLException {
+        String query = "SELECT * FROM hospede WHERE id = ?";
+        Hospede hospede = null;
+
+        try (Connection conn = Conexão.conectar();
+             PreparedStatement stmt = conn.prepareStatement(query)) {
+
+            stmt.setInt(1, id);
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    hospede = new Hospede();
+                    hospede.setId(rs.getInt("id"));
+                    hospede.setNome(rs.getString("nome"));
+                    hospede.setDocumento(rs.getString("documento"));
+                    hospede.setTelefone(rs.getString("telefone"));
+                }
+            }
+
+        } catch (SQLException erro) {
+            erro.printStackTrace();
+        }
+        return hospede;
+    }
+
 }
 

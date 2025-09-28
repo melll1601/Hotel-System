@@ -99,5 +99,60 @@ public class ReservaDAO {
             return java.util.Collections.emptyList();
         }
     }
+
+    public static Reserva pesqReservasPorId(int id) throws SQLException {
+        String query = """
+                SELECT r.id, r.quarto_id, r.hospede_id, r.data_entrada, r.data_saida,
+                       h.nome AS nome_hospede, q.numero AS numero_quarto
+                FROM reserva r
+                JOIN hospede h ON r.hospede_id = h.id
+                JOIN quarto q ON r.quarto_id = q.id
+                WHERE r.id = ?
+                """;
+
+        try(Connection conn = Conexão.conectar();
+            PreparedStatement stmt = conn.prepareStatement(query)){
+
+            stmt.setInt(1, id);
+            var rs = stmt.executeQuery();
+
+            if(rs.next()){
+                Reserva reserva = new Reserva();
+                reserva.setId(rs.getInt("id"));
+                reserva.setQuarto_id(rs.getInt("quarto_id"));
+                reserva.setHospede_id(rs.getInt("hospede_id"));
+                reserva.setData_entrada(rs.getDate("data_entrada").toLocalDate());
+                reserva.setData_saida(rs.getDate("data_saida").toLocalDate());
+                return reserva;
+            } else {
+                System.out.println("Reserva não encontrada.");
+                return null;
+            }
+
+        }catch (SQLException erro){
+            erro.printStackTrace();
+            return null;
+        }
+    }
+
+    public static void cancelarReserva(int id) throws SQLException {
+        String query = "DELETE FROM reserva WHERE id = ?";
+
+        try(Connection conn = Conexão.conectar();
+            PreparedStatement stmt = conn.prepareStatement(query)){
+
+            stmt.setInt(1, id);
+            int rowsAffected = stmt.executeUpdate();
+
+            if(rowsAffected > 0){
+                System.out.println("Reserva cancelada com sucesso.");
+            } else {
+                System.out.println("Reserva não encontrada.");
+            }
+
+        }catch (SQLException erro){
+            erro.printStackTrace();
+        }
+    }
     
 }

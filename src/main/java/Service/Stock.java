@@ -160,11 +160,67 @@ public class Stock {
                 }
             }
 
+            case 4 -> {
+
+                int id = Attendant.editarDados();
+                var hospede = HospedeDAO.pesqHospedesPorId(id);
+
+                if (hospede != null) {
+                    System.out.println("Hóspede encontrado:");
+                    System.out.printf("ID: %d, Nome: %s, Documento: %s, Telefone: %s%n",
+                            hospede.getId(), hospede.getNome(), hospede.getDocumento(), hospede.getTelefone());
+
+                    System.out.println("Digite os novos dados do hóspede:");
+                    System.out.print("Nome: ");
+                    String nome = leia.nextLine();
+                    System.out.print("Documento: ");
+                    String documento = leia.nextLine();
+                    System.out.print("Telefone: ");
+                    String telefone = leia.nextLine();
+
+                    hospede.setNome(nome);
+                    hospede.setDocumento(documento);
+                    hospede.setTelefone(telefone);
+
+                    HospedeDAO.editarHospede(hospede);
+                    System.out.println("[EDITADO COM SUCESSO]");
+                } else {
+                    System.out.println("Nenhum hóspede encontrado com o ID fornecido.");
+                }
+            }
+
+            case 5 -> {
+
+                int idReserva = Attendant.cancelarReserva();
+                var reserva = ReservaDAO.pesqReservasPorId(idReserva);
+
+                if (reserva != null) {
+                    System.out.println("Reserva encontrada:");
+                    System.out.printf("ID: %d, Quarto: %d, Hóspede: %d, Data Entrada: %s, Data Saída: %s%n",
+                            reserva.getId(), reserva.getQuarto_id(), reserva.getHospede_id(),
+                            reserva.getData_entrada(), reserva.getData_saida());
+
+                    System.out.print("Tem certeza que deseja cancelar esta reserva? (s/n): ");
+                    String confirmacao = leia.nextLine();
+
+                    if (confirmacao.equalsIgnoreCase("s")) {
+                        ReservaDAO.cancelarReserva(idReserva);
+                        System.out.println("[RESERVA CANCELADA COM SUCESSO]");
+                    } else {
+                        System.out.println("Cancelamento de reserva abortado.");
+                    }
+                } else {
+                    System.out.println("Nenhuma reserva encontrada com o ID fornecido.");
+                }
+            }
+
             case 6 ->{
                 Attendant.sairSistema();
                 return 0;
             }
         }
+
         return opcaoEscolhida;
+        
     }
 }

@@ -9,6 +9,9 @@ import Model.Hospede;
 import Model.Quarto;
 import Util.Validate;
 import View.Attendant;
+import Model.Servico;
+import Model.Reserva;
+import Dao.ReservaDAO;
 
 public class ReservaController {
     
@@ -54,27 +57,32 @@ public class ReservaController {
     }
 
     public static void listarReservas() {
-        System.out.println(" ");
+        System.out.println();
         Attendant.tituloListar();
 
-        List <Model.Reserva> reservas = Dao.ReservaDAO.listarReservas();
+        List<Model.Reserva> reservas = Dao.ReservaDAO.listarReservas();
         if (reservas.isEmpty()) {
             System.out.println("|        Nenhuma reserva cadastrada!       |");
+
         } else {
-            for (Model.Reserva reserva : reservas) {
-                System.out.println("| ID: " + reserva.getId() + 
-                                   " | Hóspede: " + reserva.getHospede().getNome() + 
-                                   " | Quarto: " + reserva.getQuarto().getNumero() + 
-                                   " | Entrada: " + new java.text.SimpleDateFormat("dd/MM/yyyy").format(reserva.getDataEntrada()) + 
-                                   " | Saída: " + new java.text.SimpleDateFormat("dd/MM/yyyy").format(reserva.getDataSaida()) + 
-                                   " | Código Reserva: " + reserva.getCodigoReserva() + 
-                                   " |");
+
+            System.out.printf("| %-3s | %-7s | %-6s | %-7s | %-8s | %-6s |\n",
+                    "ID", "Hóspede", "Quarto", "Entrada", "Saída", "Código");
+            System.out.println("|------------------------------------------------------|");
+
+            for (Model.Reserva r : reservas) {
+                System.out.printf("| %-3s | %-7s | %-6s | %-7s | %-8s | %-6s |\n",
+                        r.getId(),
+                        r.getHospede().getNome(),
+                        r.getQuarto().getNumero(),
+                        new java.text.SimpleDateFormat("dd/MM").format(r.getDataEntrada()),
+                        new java.text.SimpleDateFormat("dd/MM").format(r.getDataSaida()),
+                        r.getCodigoReserva());
             }
-        }
-
-        System.out.println("|------------------------------------------|");
-
+            System.out.println("|------------------------------------------------------|");
     }
+}
+
 
     public static void adicionarServico(int idReserva, int opcaoServico) {
         Reserva reserva = ReservaDAO.buscarPorId(idReserva);

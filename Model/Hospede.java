@@ -1,46 +1,26 @@
 package Model;
 
-public class Hospede {
+public class Hospede extends Pessoa {
     
-    private int id;
-    private String nome;
     private String documento;
     private String telefone;
 
     public Hospede() {
-        this.id = 0;
-        this.nome = null;
+        super();
         this.documento = null;
         this.telefone = null;
     }
 
     public Hospede(int id, String nome, String documento, String telefone) {
-        this.id = id;
-        this.nome = nome;
+        super(id, nome);
         this.documento = documento;
         this.telefone = telefone;
     }
 
         public Hospede(String nome, String documento, String telefone) {
-        this.nome = nome;
+        super(nome);
         this.documento = documento;
         this.telefone = telefone;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
     }
 
     public String getDocumento() {
@@ -62,6 +42,6 @@ public class Hospede {
     @Override
     public String toString() {
         System.out.println(" ");
-        return "Hospede | ID: " + id + " | " + " Nome: " + nome + " | " + " Documento: " + documento + " | " + " Telefone: " + telefone + " | " ;
+        return "Hospede | " + " Documento: " + documento + " | " + " Telefone: " + telefone + " | " ;
     }
 }

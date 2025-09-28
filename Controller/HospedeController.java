@@ -30,7 +30,7 @@ public class HospedeController {
 
     public static void editarHospede(Hospede hospede) {
         System.out.println(" ");
-        Attendant.tituloEditar();    
+        Attendant.tituloEditar();
 
         System.out.print("| -> Nome do Hóspede (" + hospede.getNome() + "): ");
         String nome = leia.nextLine();
@@ -53,26 +53,28 @@ public class HospedeController {
     }
 
 
-     public static void listarHospedes() {
-        System.out.println(" ");
-        Attendant.tituloListar();
+public static void listarHospedes() {
+    System.out.println();
+    Attendant.tituloListar();
 
-        List <Hospede> hospedes = HospedeDAO.listarHospedes();
-        if (hospedes.isEmpty()) {
-            System.out.println("|        Nenhum hóspede cadastrado!        |");
-        } else {
-            for (Hospede hospede : hospedes) {
-                System.out.println("| ID: " + hospede.getId() + 
-                                   " | Nome: " + hospede.getNome() + 
-                                   " | Documento: " + hospede.getDocumento() + 
-                                   " | Telefone: " + hospede.getTelefone() + 
-                                   " |");
-            }
+    List<Hospede> hospedes = HospedeDAO.listarHospedes();
+    if (hospedes.isEmpty()) {
+        System.out.println("|        Nenhum hóspede cadastrado!        |");
+    } else {
+        System.out.printf("| %-4s | %-15s | %-12s | %-12s |\n",
+                "ID", "Nome", "Documento", "Telefone");
+        System.out.println("|------------------------------------------------------|");
+
+        for (Hospede hospede : hospedes) {
+            System.out.printf("| %-4d | %-15s | %-12s | %-12s |\n",
+                    hospede.getId(),
+                    hospede.getNome(),
+                    hospede.getDocumento(),
+                    hospede.getTelefone());
         }
-
-        System.out.println("|------------------------------------------|");
-
     }
+        System.out.println("|------------------------------------------------------|");
+}
 
 
 

@@ -14,10 +14,10 @@ public class Main {
         Stock stock = new Stock();
         int opcaoMenuEscolhida = 0;
 
-         if (Validate.verificarSenha(leia) == null) { 
+        if (Validate.verificarSenha(leia) == null) {
             System.out.println("PROGRAMA BLOQUEADO - TENTATIVAS EXCEDIDAS !!");
 
-            return;  
+            return;
         }
 
         do {

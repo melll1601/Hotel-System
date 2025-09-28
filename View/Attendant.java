@@ -137,9 +137,9 @@ public static int MenuPrincipal(){
 
     public static void tituloListar() {
         System.out.println(" ");
-        System.out.println("|------------------------------------------|");
-        System.out.println("|     ---   Gabelm Hotel Listagem    ---   |");
-        System.out.println("|------------------------------------------|");
+        System.out.println("|------------------------------------------------------|");
+        System.out.println("|           ---   Gabelm Hotel Listagem      ---       |");
+        System.out.println("|------------------------------------------------------|");
     }
 
     public static int menuPesquisar(){

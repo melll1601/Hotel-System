@@ -49,7 +49,7 @@ public class HospedeDAO {
 
         if(!pesquisado){
             Attendant.naoEncontrado();
-        }            
+        }
     }
 
     public static void editarDados(){
@@ -57,16 +57,30 @@ public class HospedeDAO {
         int idHospede = Attendant.editarDados();
         boolean editado = false;
 
-         for (Hospede hospede : listarHospedes()) {
-        if (hospede.getId() == idHospede) {
-            HospedeController.editarHospede(hospede); 
-            editado = true;
-            break; 
-        }
+        for (Hospede hospede : listarHospedes()) {
+            if (hospede.getId() == idHospede) {
+                HospedeController.editarHospede(hospede);
+                editado = true;
+                break;
+            }
         }
 
         if (!editado) {
         System.out.println("Erro: Hóspede não encontrado.");
         }
     }
+
+    public static boolean hospedeExiste(String documento) {
+    List<Hospede> hospedes = listarHospedes();
+
+    for (Hospede hospede : hospedes) {
+        if (hospede.getDocumento().equals(documento)) {
+            return true;
+        }
+    }
+    return false;
+}
+
+
+
 }

@@ -47,7 +47,7 @@ public class QuartoDAO {
 
         if(!pesquisado){
             Attendant.naoEncontrado();
-        }            
+        }
     }
 
 }

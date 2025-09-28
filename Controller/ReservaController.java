@@ -53,7 +53,13 @@ public class ReservaController {
             return;
         }
 
-        Dao.ReservaDAO.cadastrarReserva(hospede, quarto, dataEntrada, dataSaida, codigoReserva);
+    if (ReservaDAO.quartoJaReservado(idQuarto)) {
+        System.out.println("| Erro: Este quarto já está reservado!");
+        return;
+    }
+
+    ReservaDAO.cadastrarReserva(hospede, quarto, dataEntrada, dataSaida, codigoReserva);
+        System.out.println("| Reserva cadastrada com sucesso!");
     }
 
     public static void listarReservas() {

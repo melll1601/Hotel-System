@@ -25,7 +25,14 @@ public class HospedeController {
         System.out.print("| -> Telefone: ");
         String telefone = leia.nextLine();
 
-        Dao.HospedeDAO.cadastrarHospede(nome, documento, telefone);
+
+    if (Dao.HospedeDAO.hospedeExiste(documento)) {
+        System.out.println("| Erro: Hóspede já cadastrado com esse documento!");
+        return;
+    }
+
+    Dao.HospedeDAO.cadastrarHospede(nome, documento, telefone);
+    System.out.println("| Hóspede cadastrado com sucesso!");
     }
 
     public static void editarHospede(Hospede hospede) {
@@ -53,33 +60,26 @@ public class HospedeController {
     }
 
 
-public static void listarHospedes() {
-    System.out.println();
-    Attendant.tituloListar();
+    public static void listarHospedes() {
+        System.out.println();
+        Attendant.tituloListar();
 
-    List<Hospede> hospedes = HospedeDAO.listarHospedes();
-    if (hospedes.isEmpty()) {
-        System.out.println("|        Nenhum hóspede cadastrado!        |");
-    } else {
-        System.out.printf("| %-4s | %-15s | %-12s | %-12s |\n",
-                "ID", "Nome", "Documento", "Telefone");
-        System.out.println("|------------------------------------------------------|");
+        List<Hospede> hospedes = HospedeDAO.listarHospedes();
+        if (hospedes.isEmpty()) {
+            System.out.println("|        Nenhum hóspede cadastrado!        |");
+        } else {
+            System.out.printf("| %-4s | %-15s | %-12s | %-12s |\n",
+                    "ID", "Nome", "Documento", "Telefone");
+            System.out.println("|------------------------------------------------------|");
 
-        for (Hospede hospede : hospedes) {
-            System.out.printf("| %-4d | %-15s | %-12s | %-12s |\n",
-                    hospede.getId(),
-                    hospede.getNome(),
-                    hospede.getDocumento(),
-                    hospede.getTelefone());
+            for (Hospede hospede : hospedes) {
+                System.out.printf("| %-4d | %-15s | %-12s | %-12s |\n",
+                        hospede.getId(),
+                        hospede.getNome(),
+                        hospede.getDocumento(),
+                        hospede.getTelefone());
+            }
         }
+            System.out.println("|------------------------------------------------------|");
     }
-        System.out.println("|------------------------------------------------------|");
-}
-
-
-
-
-
-
-
 }

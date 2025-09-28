@@ -40,7 +40,7 @@ public class ReservaDAO {
 
         if(!pesquisado){
             Attendant.naoEncontrado();
-        }            
+        }
     }
 
     public static void excluirReserva(){
@@ -69,6 +69,18 @@ public class ReservaDAO {
         }
         return null;
     }
+
+    public static boolean quartoJaReservado(int idQuarto) {
+
+        for (Reserva r : listaReservas) {
+            if (r.getQuarto().getNumero() == idQuarto) {
+                return true; 
+            }
+        }
+        return false; // quarto disponível
+    }
+
 }
+
     
 

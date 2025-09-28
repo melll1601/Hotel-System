@@ -32,34 +32,30 @@ public class HospedeDAO {
         }
     }
 
-    public static List<Hospede>  ListarHospedes() throws SQLException{
-        String query = """
-                SELECT id, nome, documento, telefone
-                FROM hospede
-                """;
-        List<Hospede> listHospedes = new ArrayList<>();
+    public static void listarHospedes() throws SQLException {
+        String query = "SELECT * FROM hospede";
 
-        try(Connection conn = Conexão.conectar();
-        PreparedStatement stmt = conn.prepareStatement(query)){
+        try (Connection conn = Conexão.conectar();
+            PreparedStatement stmt = conn.prepareStatement(query);
+            ResultSet rs = stmt.executeQuery()) {
 
-            ResultSet rs = stmt.executeQuery();
+            System.out.println("Lista de Hóspedes:");
+            System.out.printf("%-5s %-20s %-15s %-15s%n", "ID", "Nome", "Documento", "Telefone");
+            System.out.println("------------------------------------------------------");
 
-            while(rs.next()){
+            while (rs.next()) {
                 int id = rs.getInt("id");
                 String nome = rs.getString("nome");
                 String documento = rs.getString("documento");
                 String telefone = rs.getString("telefone");
 
-                var hospede = new Hospede(id, nome, documento, telefone);
-                listHospedes.add(hospede);
+                System.out.printf("%-5d %-20s %-15s %-15s%n", id, nome, documento, telefone);
             }
 
-        }catch (SQLException erro){
+        } catch (SQLException erro) {
             erro.printStackTrace();
         }
-
-        return listHospedes;
     }
 
-
 }
+

@@ -65,11 +65,11 @@ public class Validate {
             String entrada = leia.nextLine();
 
             try {
-                String formatacao = entrada.replace(" ", "_").toUpperCase();
+                String formatacao = entrada.replace(" ", "_").toLowerCase();
                 Quarto.Tipo tipoPedido = Quarto.Tipo.valueOf(formatacao);
                 return tipoPedido;
             } catch (IllegalArgumentException erro) {
-                System.out.println("[ALGO DEU ERRADO]");
+                System.out.println("[ALGO DEU ERRADO] Digite: simples, duplo ou suite.");
             }
         }
     }

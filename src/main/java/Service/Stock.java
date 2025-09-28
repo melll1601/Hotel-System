@@ -2,6 +2,7 @@ package Service;
 
 import DAO.HospedeDAO;
 import DAO.QuartoDAO;
+import DAO.ReservaDAO;
 import View.Attendant;
 import java.sql.SQLException;
 import java.util.Scanner;
@@ -21,6 +22,7 @@ public class Stock {
                 switch (opcaoCadastro){
 
                     case 1 ->{
+                        
                         var hospede = Register.cadastroHospede(leia);
 
                         try{
@@ -32,6 +34,7 @@ public class Stock {
                     }
 
                     case 2 ->{
+                        
                         var quarto = Register.cadastroQuarto(leia);
 
                         try{
@@ -40,6 +43,51 @@ public class Stock {
                         }catch (SQLException erro){
                             erro.printStackTrace();
                         }
+                    }
+
+                    case 3 ->{
+
+                        var reserva = Register.cadastroReserva(leia);
+
+                        try{
+                            ReservaDAO.cadastrarReserva(reserva);
+                            System.out.println("[CADASTRO CONCLUÍDO]");
+                        }catch (SQLException erro){
+                            erro.printStackTrace();
+                        }
+                    }
+                }
+            }
+
+            case 2 ->{
+
+                int escolhaListar = Attendant.MenuListar();
+
+                switch (escolhaListar){
+
+                    case 1 ->{
+                        HospedeDAO.listarHospedes();
+                        break;
+                    }
+
+                    case 2 ->{
+                        QuartoDAO.listarQuartos();
+                        break;
+                    }
+
+                    case 3 ->{
+                        ReservaDAO.listarReservas();
+                        break;
+                    }
+
+                    case 0 -> {
+                        Attendant.MenuPrincipal();
+                        break;
+                    }
+
+                    default -> {
+                        System.out.println("Opção inválida. Tente novamente.");
+                        break;
                     }
                 }
             }

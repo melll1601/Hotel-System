@@ -11,8 +11,11 @@ public class Main {
         int opcaoMenuEscolhida = 0;
 
         do {
-            opcaoMenuEscolhida = Attendant.MenuPrincipal(); // não precisa criar 'attendant'
-            stock.gerenciarEstoque(opcaoMenuEscolhida, attendant); // chame sem passar 'attendant'
+
+            opcaoMenuEscolhida = Attendant.MenuPrincipal();
+            stock.gerenciarEstoque(opcaoMenuEscolhida, attendant);
+
         } while(opcaoMenuEscolhida != 0);
+        
     }
 }

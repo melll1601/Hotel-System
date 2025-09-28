@@ -28,4 +28,33 @@ public class QuartoDAO {
             erro.printStackTrace();
         }
     }
+
+    public static void listarQuartos() throws SQLException {
+        String query = """
+                SELECT numero, tipo, preco
+                FROM quarto
+                """;
+
+        try(Connection conn = Conexão.conectar();
+            PreparedStatement stmt = conn.prepareStatement(query)){
+
+            var rs = stmt.executeQuery();
+
+            System.out.println("Lista de Quartos:");
+            System.out.printf("%-10s %-15s %-10s%n", "Número", "Tipo", "Preço");
+            System.out.println("---------------------------------------");
+
+            while(rs.next()){
+                int numero = rs.getInt("numero");
+                String tipo = rs.getString("tipo");
+                double preco = rs.getDouble("preco");
+
+                System.out.printf("%-10d %-15s %-10.2f%n", numero, tipo, preco);
+            }
+
+        }catch (SQLException erro){
+            erro.printStackTrace();
+        }
+    }
+    
 }

@@ -18,7 +18,8 @@ public class QuartoController {
         System.out.println(" ");
         Attendant.tituloCadastrar();
 
-        System.out.print("| -> Tipo do Quarto (Simples, Luxo, Suite, Presidencial): ");
+        System.out.print("| -> Tipo do Quarto \n (Simples, Luxo, Suite, Presidencial): \n ");
+
         String tipo = leia.nextLine();
         System.out.print("| -> Preço da Diária: ");
         double preco = Validate.ValidarDouble();

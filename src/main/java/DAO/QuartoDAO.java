@@ -6,7 +6,10 @@ import Util.Conexão;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
+import java.util.ArrayList;
 
 public class QuartoDAO {
 
@@ -55,6 +58,33 @@ public class QuartoDAO {
         }catch (SQLException erro){
             erro.printStackTrace();
         }
+    }
+
+    public static List<Quarto> pesqQuartosPorNumero(int numero) throws SQLException {
+        String query = "SELECT * FROM quarto WHERE numero = ?";
+        List<Quarto> quartos = new ArrayList<>();
+
+        try (Connection conn = Conexão.conectar();
+            PreparedStatement stmt = conn.prepareStatement(query)) {
+
+            stmt.setInt(1, numero);
+
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    Quarto quarto = new Quarto(
+                        rs.getInt("id"),
+                        rs.getInt("numero"),
+                        Quarto.Tipo.valueOf(rs.getString("tipo").toLowerCase()),
+                        rs.getDouble("preco")
+                    );
+                    quartos.add(quarto);
+                }
+            }
+
+        } catch (SQLException erro) {
+            erro.printStackTrace();
+        }
+        return quartos;
     }
     
 }

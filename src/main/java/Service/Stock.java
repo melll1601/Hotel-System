@@ -11,7 +11,7 @@ public class Stock {
 
     public static Scanner leia = new Scanner(System.in);
 
-    public void gerenciarEstoque (int opcaoEscolhida, Attendant attendant) throws SQLException {
+    public int gerenciarEstoque (int opcaoEscolhida, Attendant attendant) throws SQLException {
 
         switch (opcaoEscolhida){
 
@@ -92,9 +92,79 @@ public class Stock {
                 }
             }
 
+            case 3 -> {
+
+                int escolhaPesquisar = Attendant.menuPesquisar();
+
+                switch (escolhaPesquisar) {
+                    
+                    case 1 -> {
+                        System.out.println("Digite o nome do hóspede que deseja pesquisar: ");
+                        String nome = leia.nextLine();
+                        var hospedes = HospedeDAO.pesqHospedesPorNome(nome);
+
+                        if (hospedes.isEmpty()) {
+                            System.out.println("Nenhum hóspede encontrado.");
+                        } else {
+                            for (var hospede : hospedes) {
+                                System.out.println(" ");
+                                System.out.printf("ID: %d, Nome: %s, Documento: %s, Telefone: %s%n",
+                                        hospede.getId(), hospede.getNome(), hospede.getDocumento(), hospede.getTelefone());
+                            }
+                        }
+                    }
+
+                    case 2 -> {
+                        System.out.println("Digite o número do quarto que deseja pesquisar: ");
+                        int numero = leia.nextInt();
+                        leia.nextLine();
+                        var quartos = QuartoDAO.pesqQuartosPorNumero(numero);
+
+                        if (quartos.isEmpty()) {
+                            System.out.println("Nenhum quarto encontrado.");
+                        } else {
+                            for (var quarto : quartos) {
+                                System.out.println(" ");
+                                System.out.printf("ID: %d, Número: %d, Tipo: %s, Preço: %.2f%n",
+                                        quarto.getId(), quarto.getNumero(), quarto.getTipo(), quarto.getPreco());
+                            }
+                        }
+                    }
+
+                    case 3 -> {
+                        System.out.println("Digite o nome do hóspede para listar suas reservas: ");
+                        String nome = leia.nextLine();
+                        var reservas = ReservaDAO.pesqReservasPorNomeHospede(nome);
+
+                        if (reservas.isEmpty()) {
+                            System.out.println("Nenhuma reserva encontrada.");
+                        } else {
+                            for (var reserva : reservas) {
+                                System.out.println(" ");
+                                System.out.printf("ID: %d, Quarto: %d, Hóspede: %d, Data Entrada: %s, Data Saída: %s%n",
+                                        reserva.getId(), reserva.getQuarto_id(), reserva.getHospede_id(),
+                                        reserva.getData_entrada(), reserva.getData_saida());
+                            }
+                        }
+                    }
+
+                    case 0 -> {
+                        Attendant.MenuPrincipal();
+                        break;
+                    }
+
+                    default -> {
+                        System.out.println("Opção inválida. Tente novamente.");
+                        break;
+                    }
+                }
+            }
+
             case 6 ->{
                 Attendant.sairSistema();
+                return 0;
             }
         }
+        return opcaoEscolhida;
     }
 }

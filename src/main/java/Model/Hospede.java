@@ -7,6 +7,8 @@ public class Hospede {
     private String documento;
     private String telefone;
 
+    public Hospede() {}
+
     public Hospede(int id, String nome, String documento, String telefone) {
         this.id = id;
         this.nome = nome;

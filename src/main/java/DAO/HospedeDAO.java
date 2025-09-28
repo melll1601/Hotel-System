@@ -57,5 +57,30 @@ public class HospedeDAO {
         }
     }
 
+    public static List<Hospede> pesqHospedesPorNome(String nome) throws SQLException {
+        String query = "SELECT * FROM hospede WHERE nome LIKE ?";
+        List<Hospede> hospedes = new ArrayList<>();
+
+        try (Connection conn = Conexão.conectar();
+             PreparedStatement stmt = conn.prepareStatement(query)) {
+
+            stmt.setString(1, "%" + nome + "%");
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    Hospede hospede = new Hospede();
+                    hospede.setId(rs.getInt("id"));
+                    hospede.setNome(rs.getString("nome"));
+                    hospede.setDocumento(rs.getString("documento"));
+                    hospede.setTelefone(rs.getString("telefone"));
+                    hospedes.add(hospede);
+                }
+            }
+
+        } catch (SQLException erro) {
+            erro.printStackTrace();
+        }
+        return hospedes;
+    }
+
 }
 

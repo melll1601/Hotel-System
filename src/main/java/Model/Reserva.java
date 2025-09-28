@@ -10,6 +10,8 @@ public class Reserva {
     private LocalDate data_entrada;
     private LocalDate data_saida;
 
+    public Reserva() {}
+
     public Reserva(int id, int quarto_id, int hospede_id, LocalDate data_entrada, LocalDate data_saida) {
         this.id = id;
         this.quarto_id = quarto_id;

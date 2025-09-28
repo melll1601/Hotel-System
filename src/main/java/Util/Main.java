@@ -8,14 +8,14 @@ public class Main {
     public static void main(String[] args) throws SQLException {
         Attendant attendant = new Attendant();
         Stock stock = new Stock();
-        int opcaoMenuEscolhida = 0;
+        int opcaoMenuEscolhida;
 
         do {
 
             opcaoMenuEscolhida = Attendant.MenuPrincipal();
-            stock.gerenciarEstoque(opcaoMenuEscolhida, attendant);
+            opcaoMenuEscolhida = stock.gerenciarEstoque(opcaoMenuEscolhida, attendant);
 
         } while(opcaoMenuEscolhida != 0);
-        
+
     }
 }

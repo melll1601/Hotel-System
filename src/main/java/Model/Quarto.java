@@ -13,6 +13,8 @@ public class Quarto {
         suite
     }
 
+    public Quarto() {}
+
     public Quarto(int id, int numero, Tipo tipo, double preco) {
         this.id = id;
         this.numero = numero;

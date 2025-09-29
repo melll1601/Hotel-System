@@ -1,0 +1,1445 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gabelm Hotel - Admin Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Login Page -->
+    <div id="loginPage" class="login-container">
+        <div class="login-card">
+            <div class="login-header">
+                <img src="/public/logo.png" alt="Gabelm Hotel" class="login-logo">
+                <h1>Painel Administrativo</h1>
+                <p>Bem-vindo ao sistema de gerenciamento</p>
+            </div>
+            <form id="loginForm" class="login-form">
+                <div class="form-group">
+                    <label for="password">Senha de Acesso</label>
+                    <input type="password" id="password" placeholder="Digite sua senha" required>
+                </div>
+                <button type="submit" class="btn-primary">Entrar no Sistema</button>
+                <div id="loginError" class="error-message"></div>
+            </form>
+            <div class="login-footer">
+                <p>Sistema seguro e criptografado</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Dashboard Container -->
+    <div id="dashboardContainer" class="dashboard-container" style="display: none;">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <img src="/public/logo.png" alt="Gabelm Hotel" class="sidebar-logo">
+                <h2>Gabelm Hotel</h2>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <a href="#" class="nav-item active" data-page="overview">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="3" y="3" width="7" height="7"></rect>
+                        <rect x="14" y="3" width="7" height="7"></rect>
+                        <rect x="14" y="14" width="7" height="7"></rect>
+                        <rect x="3" y="14" width="7" height="7"></rect>
+                    </svg>
+                    <span>Visão Geral</span>
+                </a>
+                
+                <a href="#" class="nav-item" data-page="guests">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                        <circle cx="9" cy="7" r="4"></circle>
+                        <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                        <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                    </svg>
+                    <span>Hóspedes</span>
+                </a>
+                
+                <a href="#" class="nav-item" data-page="reservations">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                        <line x1="16" y1="2" x2="16" y2="6"></line>
+                        <line x1="8" y1="2" x2="8" y2="6"></line>
+                        <line x1="3" y1="10" x2="21" y2="10"></line>
+                    </svg>
+                    <span>Reservas</span>
+                </a>
+                
+                <a href="#" class="nav-item" data-page="rooms">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                        <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                    </svg>
+                    <span>Quartos</span>
+                </a>
+                
+                <a href="#" class="nav-item" data-page="analytics">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="12" y1="20" x2="12" y2="10"></line>
+                        <line x1="18" y1="20" x2="18" y2="4"></line>
+                        <line x1="6" y1="20" x2="6" y2="16"></line>
+                    </svg>
+                    <span>Análises</span>
+                </a>
+            </nav>
+            
+            <div class="sidebar-footer">
+                <button id="logoutBtn" class="btn-logout">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                        <polyline points="16 17 21 12 16 7"></polyline>
+                        <line x1="21" y1="12" x2="9" y2="12"></line>
+                    </svg>
+                    Sair
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Overview Page -->
+            <div id="overviewPage" class="page active">
+                <div class="page-header">
+                    <div>
+                        <h1>Visão Geral</h1>
+                        <p>Bem-vindo ao painel administrativo do Gabelm Hotel</p>
+                    </div>
+                    <div class="header-actions">
+                        <span class="date-display">Hoje, 29 de Setembro de 2025</span>
+                    </div>
+                </div>
+
+                <!-- Stats Cards -->
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon green">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="9" cy="7" r="4"></circle>
+                                <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                                <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                            </svg>
+                        </div>
+                        <div class="stat-content">
+                            <p class="stat-label">Total de Hóspedes</p>
+                            <h3 class="stat-value">1,247</h3>
+                            <span class="stat-change positive">+12.5% este mês</span>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon blue">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                                <line x1="16" y1="2" x2="16" y2="6"></line>
+                                <line x1="8" y1="2" x2="8" y2="6"></line>
+                                <line x1="3" y1="10" x2="21" y2="10"></line>
+                            </svg>
+                        </div>
+                        <div class="stat-content">
+                            <p class="stat-label">Reservas Ativas</p>
+                            <h3 class="stat-value">89</h3>
+                            <span class="stat-change positive">+8 hoje</span>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon yellow">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                                <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                            </svg>
+                        </div>
+                        <div class="stat-content">
+                            <p class="stat-label">Taxa de Ocupação</p>
+                            <h3 class="stat-value">87.5%</h3>
+                            <span class="stat-change positive">+5.2% vs. semana passada</span>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon purple">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <line x1="12" y1="1" x2="12" y2="23"></line>
+                                <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+                            </svg>
+                        </div>
+                        <div class="stat-content">
+                            <p class="stat-label">Receita Mensal</p>
+                            <h3 class="stat-value">R$ 487.5K</h3>
+                            <span class="stat-change positive">+18.2% este mês</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Charts and Tables -->
+                <div class="content-grid">
+                    <div class="card large">
+                        <div class="card-header">
+                            <h3>Reservas Recentes</h3>
+                            <button class="btn-secondary">Ver Todas</button>
+                        </div>
+                        <div class="table-container">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>Hóspede</th>
+                                        <th>Quarto</th>
+                                        <th>Check-in</th>
+                                        <th>Check-out</th>
+                                        <th>Status</th>
+                                        <th>Valor</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <div class="guest-info">
+                                                <div class="avatar">MC</div>
+                                                <span>Maria Clara Silva</span>
+                                            </div>
+                                        </td>
+                                        <td>Suite 301</td>
+                                        <td>29/09/2025</td>
+                                        <td>03/10/2025</td>
+                                        <td><span class="badge success">Confirmada</span></td>
+                                        <td>R$ 2.400,00</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="guest-info">
+                                                <div class="avatar">JS</div>
+                                                <span>João Santos</span>
+                                            </div>
+                                        </td>
+                                        <td>Quarto 205</td>
+                                        <td>30/09/2025</td>
+                                        <td>02/10/2025</td>
+                                        <td><span class="badge warning">Pendente</span></td>
+                                        <td>R$ 900,00</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="guest-info">
+                                                <div class="avatar">AP</div>
+                                                <span>Ana Paula Costa</span>
+                                            </div>
+                                        </td>
+                                        <td>Suite 402</td>
+                                        <td>01/10/2025</td>
+                                        <td>05/10/2025</td>
+                                        <td><span class="badge success">Confirmada</span></td>
+                                        <td>R$ 3.200,00</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="guest-info">
+                                                <div class="avatar">RF</div>
+                                                <span>Ricardo Ferreira</span>
+                                            </div>
+                                        </td>
+                                        <td>Quarto 108</td>
+                                        <td>29/09/2025</td>
+                                        <td>30/09/2025</td>
+                                        <td><span class="badge info">Check-in Hoje</span></td>
+                                        <td>R$ 450,00</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="guest-info">
+                                                <div class="avatar">LM</div>
+                                                <span>Luciana Martins</span>
+                                            </div>
+                                        </td>
+                                        <td>Suite 501</td>
+                                        <td>02/10/2025</td>
+                                        <td>08/10/2025</td>
+                                        <td><span class="badge success">Confirmada</span></td>
+                                        <td>R$ 4.800,00</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Status dos Quartos</h3>
+                        </div>
+                        <div class="room-status-grid">
+                            <div class="room-status-item">
+                                <div class="room-status-icon occupied"></div>
+                                <div>
+                                    <p class="room-status-label">Ocupados</p>
+                                    <p class="room-status-value">42 quartos</p>
+                                </div>
+                            </div>
+                            <div class="room-status-item">
+                                <div class="room-status-icon available"></div>
+                                <div>
+                                    <p class="room-status-label">Disponíveis</p>
+                                    <p class="room-status-value">18 quartos</p>
+                                </div>
+                            </div>
+                            <div class="room-status-item">
+                                <div class="room-status-icon maintenance"></div>
+                                <div>
+                                    <p class="room-status-label">Manutenção</p>
+                                    <p class="room-status-value">3 quartos</p>
+                                </div>
+                            </div>
+                            <div class="room-status-item">
+                                <div class="room-status-icon cleaning"></div>
+                                <div>
+                                    <p class="room-status-label">Limpeza</p>
+                                    <p class="room-status-value">7 quartos</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="content-grid">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Check-ins de Hoje</h3>
+                        </div>
+                        <div class="checkin-list">
+                            <div class="checkin-item">
+                                <div class="avatar">RF</div>
+                                <div class="checkin-info">
+                                    <p class="checkin-name">Ricardo Ferreira</p>
+                                    <p class="checkin-room">Quarto 108 • 14:00</p>
+                                </div>
+                                <button class="btn-icon">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <polyline points="20 6 9 17 4 12"></polyline>
+                                    </svg>
+                                </button>
+                            </div>
+                            <div class="checkin-item">
+                                <div class="avatar">MC</div>
+                                <div class="checkin-info">
+                                    <p class="checkin-name">Maria Clara Silva</p>
+                                    <p class="checkin-room">Suite 301 • 15:30</p>
+                                </div>
+                                <button class="btn-icon">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <polyline points="20 6 9 17 4 12"></polyline>
+                                    </svg>
+                                </button>
+                            </div>
+                            <div class="checkin-item">
+                                <div class="avatar">PM</div>
+                                <div class="checkin-info">
+                                    <p class="checkin-name">Pedro Mendes</p>
+                                    <p class="checkin-room">Quarto 203 • 16:00</p>
+                                </div>
+                                <button class="btn-icon">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <polyline points="20 6 9 17 4 12"></polyline>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Atividades Recentes</h3>
+                        </div>
+                        <div class="activity-list">
+                            <div class="activity-item">
+                                <div class="activity-icon green">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                                        <circle cx="8.5" cy="7" r="4"></circle>
+                                        <line x1="20" y1="8" x2="20" y2="14"></line>
+                                        <line x1="23" y1="11" x2="17" y2="11"></line>
+                                    </svg>
+                                </div>
+                                <div class="activity-content">
+                                    <p class="activity-text">Novo hóspede cadastrado: <strong>Carla Souza</strong></p>
+                                    <p class="activity-time">Há 5 minutos</p>
+                                </div>
+                            </div>
+                            <div class="activity-item">
+                                <div class="activity-icon blue">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                                        <line x1="16" y1="2" x2="16" y2="6"></line>
+                                        <line x1="8" y1="2" x2="8" y2="6"></line>
+                                        <line x1="3" y1="10" x2="21" y2="10"></line>
+                                    </svg>
+                                </div>
+                                <div class="activity-content">
+                                    <p class="activity-text">Reserva confirmada para <strong>Suite 402</strong></p>
+                                    <p class="activity-time">Há 12 minutos</p>
+                                </div>
+                            </div>
+                            <div class="activity-item">
+                                <div class="activity-icon yellow">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+                                    </svg>
+                                </div>
+                                <div class="activity-content">
+                                    <p class="activity-text">Quarto 205 liberado após limpeza</p>
+                                    <p class="activity-time">Há 28 minutos</p>
+                                </div>
+                            </div>
+                            <div class="activity-item">
+                                <div class="activity-icon purple">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <line x1="12" y1="1" x2="12" y2="23"></line>
+                                        <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+                                    </svg>
+                                </div>
+                                <div class="activity-content">
+                                    <p class="activity-text">Pagamento recebido: <strong>R$ 2.400,00</strong></p>
+                                    <p class="activity-time">Há 1 hora</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Guests Page -->
+            <div id="guestsPage" class="page">
+                <div class="page-header">
+                    <div>
+                        <h1>Gerenciamento de Hóspedes</h1>
+                        <p>Cadastre, edite e visualize informações dos hóspedes</p>
+                    </div>
+                    <button class="btn-primary" onclick="openGuestModal()">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="12" y1="5" x2="12" y2="19"></line>
+                            <line x1="5" y1="12" x2="19" y2="12"></line>
+                        </svg>
+                        Novo Hóspede
+                    </button>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <div class="search-box">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="11" cy="11" r="8"></circle>
+                                <path d="m21 21-4.35-4.35"></path>
+                            </svg>
+                            <input type="text" placeholder="Buscar hóspede por nome, CPF ou email...">
+                        </div>
+                        <select class="filter-select">
+                            <option>Todos os Status</option>
+                            <option>Ativos</option>
+                            <option>Inativos</option>
+                        </select>
+                    </div>
+                    <div class="table-container">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Hóspede</th>
+                                    <th>CPF</th>
+                                    <th>Email</th>
+                                    <th>Telefone</th>
+                                    <th>Cadastro</th>
+                                    <th>Status</th>
+                                    <th>Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody id="guestsTableBody">
+                                <tr>
+                                    <td>
+                                        <div class="guest-info">
+                                            <div class="avatar">MC</div>
+                                            <span>Maria Clara Silva</span>
+                                        </div>
+                                    </td>
+                                    <td>123.456.789-00</td>
+                                    <td>maria.silva@email.com</td>
+                                    <td>(11) 98765-4321</td>
+                                    <td>15/01/2024</td>
+                                    <td><span class="badge success">Ativo</span></td>
+                                    <td>
+                                        <div class="action-buttons">
+                                            <button class="btn-icon" onclick="editGuest(1)">
+                                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                    <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                                                    <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+                                                </svg>
+                                            </button>
+                                            <button class="btn-icon danger" onclick="deleteGuest(1)">
+                                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                    <polyline points="3 6 5 6 21 6"></polyline>
+                                                    <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                                                </svg>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="guest-info">
+                                            <div class="avatar">JS</div>
+                                            <span>João Santos</span>
+                                        </div>
+                                    </td>
+                                    <td>987.654.321-00</td>
+                                    <td>joao.santos@email.com</td>
+                                    <td>(21) 99876-5432</td>
+                                    <td>22/03/2024</td>
+                                    <td><span class="badge success">Ativo</span></td>
+                                    <td>
+                                        <div class="action-buttons">
+                                            <button class="btn-icon" onclick="editGuest(2)">
+                                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                    <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                                                    <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+                                                </svg>
+                                            </button>
+                                            <button class="btn-icon danger" onclick="deleteGuest(2)">
+                                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                    <polyline points="3 6 5 6 21 6"></polyline>
+                                                    <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                                                </svg>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="guest-info">
+                                            <div class="avatar">AP</div>
+                                            <span>Ana Paula Costa</span>
+                                        </div>
+                                    </td>
+                                    <td>456.789.123-00</td>
+                                    <td>ana.costa@email.com</td>
+                                    <td>(31) 97654-3210</td>
+                                    <td>10/05/2024</td>
+                                    <td><span class="badge success">Ativo</span></td>
+                                    <td>
+                                        <div class="action-buttons">
+                                            <button class="btn-icon" onclick="editGuest(3)">
+                                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                    <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                                                    <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+                                                </svg>
+                                            </button>
+                                            <button class="btn-icon danger" onclick="deleteGuest(3)">
+                                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                    <polyline points="3 6 5 6 21 6"></polyline>
+                                                    <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                                                </svg>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="guest-info">
+                                            <div class="avatar">RF</div>
+                                            <span>Ricardo Ferreira</span>
+                                        </div>
+                                    </td>
+                                    <td>321.654.987-00</td>
+                                    <td>ricardo.f@email.com</td>
+                                    <td>(41) 96543-2109</td>
+                                    <td>18/06/2024</td>
+                                    <td><span class="badge success">Ativo</span></td>
+                                    <td>
+                                        <div class="action-buttons">
+                                            <button class="btn-icon" onclick="editGuest(4)">
+                                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                    <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                                                    <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+                                                </svg>
+                                            </button>
+                                            <button class="btn-icon danger" onclick="deleteGuest(4)">
+                                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                    <polyline points="3 6 5 6 21 6"></polyline>
+                                                    <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                                                </svg>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="guest-info">
+                                            <div class="avatar">LM</div>
+                                            <span>Luciana Martins</span>
+                                        </div>
+                                    </td>
+                                    <td>789.123.456-00</td>
+                                    <td>luciana.m@email.com</td>
+                                    <td>(51) 95432-1098</td>
+                                    <td>25/07/2024</td>
+                                    <td><span class="badge success">Ativo</span></td>
+                                    <td>
+                                        <div class="action-buttons">
+                                            <button class="btn-icon" onclick="editGuest(5)">
+                                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                    <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                                                    <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+                                                </svg>
+                                            </button>
+                                            <button class="btn-icon danger" onclick="deleteGuest(5)">
+                                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                    <polyline points="3 6 5 6 21 6"></polyline>
+                                                    <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                                                </svg>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Reservations Page -->
+            <div id="reservationsPage" class="page">
+                <div class="page-header">
+                    <div>
+                        <h1>Gerenciamento de Reservas</h1>
+                        <p>Visualize e gerencie todas as reservas do hotel</p>
+                    </div>
+                    <button class="btn-primary" onclick="openReservationModal()">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="12" y1="5" x2="12" y2="19"></line>
+                            <line x1="5" y1="12" x2="19" y2="12"></line>
+                        </svg>
+                        Nova Reserva
+                    </button>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <div class="search-box">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="11" cy="11" r="8"></circle>
+                                <path d="m21 21-4.35-4.35"></path>
+                            </svg>
+                            <input type="text" placeholder="Buscar reserva por hóspede ou quarto...">
+                        </div>
+                        <select class="filter-select">
+                            <option>Todos os Status</option>
+                            <option>Confirmada</option>
+                            <option>Pendente</option>
+                            <option>Cancelada</option>
+                        </select>
+                    </div>
+                    <div class="table-container">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Hóspede</th>
+                                    <th>Quarto</th>
+                                    <th>Check-in</th>
+                                    <th>Check-out</th>
+                                    <th>Diárias</th>
+                                    <th>Status</th>
+                                    <th>Valor Total</th>
+                                    <th>Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>#1247</td>
+                                    <td>
+                                        <div class="guest-info">
+                                            <div class="avatar">MC</div>
+                                            <span>Maria Clara Silva</span>
+                                        </div>
+                                    </td>
+                                    <td>Suite 301</td>
+                                    <td>29/09/2025</td>
+                                    <td>03/10/2025</td>
+                                    <td>4 noites</td>
+                                    <td><span class="badge success">Confirmada</span></td>
+                                    <td>R$ 2.400,00</td>
+                                    <td>
+                                        <div class="action-buttons">
+                                            <button class="btn-icon" onclick="editReservation(1)">
+                                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                    <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                                                    <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+                                                </svg>
+                                            </button>
+                                            <button class="btn-icon danger" onclick="deleteReservation(1)">
+                                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                    <polyline points="3 6 5 6 21 6"></polyline>
+                                                    <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                                                </svg>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>#1248</td>
+                                    <td>
+                                        <div class="guest-info">
+                                            <div class="avatar">JS</div>
+                                            <span>João Santos</span>
+                                        </div>
+                                    </td>
+                                    <td>Quarto 205</td>
+                                    <td>30/09/2025</td>
+                                    <td>02/10/2025</td>
+                                    <td>2 noites</td>
+                                    <td><span class="badge warning">Pendente</span></td>
+                                    <td>R$ 900,00</td>
+                                    <td>
+                                        <div class="action-buttons">
+                                            <button class="btn-icon" onclick="editReservation(2)">
+                                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                    <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                                                    <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+                                                </svg>
+                                            </button>
+                                            <button class="btn-icon danger" onclick="deleteReservation(2)">
+                                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                    <polyline points="3 6 5 6 21 6"></polyline>
+                                                    <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                                                </svg>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>#1249</td>
+                                    <td>
+                                        <div class="guest-info">
+                                            <div class="avatar">AP</div>
+                                            <span>Ana Paula Costa</span>
+                                        </div>
+                                    </td>
+                                    <td>Suite 402</td>
+                                    <td>01/10/2025</td>
+                                    <td>05/10/2025</td>
+                                    <td>4 noites</td>
+                                    <td><span class="badge success">Confirmada</span></td>
+                                    <td>R$ 3.200,00</td>
+                                    <td>
+                                        <div class="action-buttons">
+                                            <button class="btn-icon" onclick="editReservation(3)">
+                                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                    <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                                                    <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+                                                </svg>
+                                            </button>
+                                            <button class="btn-icon danger" onclick="deleteReservation(3)">
+                                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                    <polyline points="3 6 5 6 21 6"></polyline>
+                                                    <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                                                </svg>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>#1250</td>
+                                    <td>
+                                        <div class="guest-info">
+                                            <div class="avatar">RF</div>
+                                            <span>Ricardo Ferreira</span>
+                                        </div>
+                                    </td>
+                                    <td>Quarto 108</td>
+                                    <td>29/09/2025</td>
+                                    <td>30/09/2025</td>
+                                    <td>1 noite</td>
+                                    <td><span class="badge info">Check-in Hoje</span></td>
+                                    <td>R$ 450,00</td>
+                                    <td>
+                                        <div class="action-buttons">
+                                            <button class="btn-icon" onclick="editReservation(4)">
+                                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                    <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                                                    <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+                                                </svg>
+                                            </button>
+                                            <button class="btn-icon danger" onclick="deleteReservation(4)">
+                                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                    <polyline points="3 6 5 6 21 6"></polyline>
+                                                    <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                                                </svg>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>#1251</td>
+                                    <td>
+                                        <div class="guest-info">
+                                            <div class="avatar">LM</div>
+                                            <span>Luciana Martins</span>
+                                        </div>
+                                    </td>
+                                    <td>Suite 501</td>
+                                    <td>02/10/2025</td>
+                                    <td>08/10/2025</td>
+                                    <td>6 noites</td>
+                                    <td><span class="badge success">Confirmada</span></td>
+                                    <td>R$ 4.800,00</td>
+                                    <td>
+                                        <div class="action-buttons">
+                                            <button class="btn-icon" onclick="editReservation(5)">
+                                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                    <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                                                    <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+                                                </svg>
+                                            </button>
+                                            <button class="btn-icon danger" onclick="deleteReservation(5)">
+                                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                    <polyline points="3 6 5 6 21 6"></polyline>
+                                                    <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                                                </svg>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Rooms Page -->
+            <div id="roomsPage" class="page">
+                <div class="page-header">
+                    <div>
+                        <h1>Gerenciamento de Quartos</h1>
+                        <p>Cadastre e gerencie os quartos do hotel</p>
+                    </div>
+                    <button class="btn-primary" onclick="openRoomModal()">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="12" y1="5" x2="12" y2="19"></line>
+                            <line x1="5" y1="12" x2="19" y2="12"></line>
+                        </svg>
+                        Novo Quarto
+                    </button>
+                </div>
+
+                <div class="rooms-grid">
+                    <div class="room-card available">
+                        <div class="room-card-header">
+                            <div>
+                                <h3>Quarto 101</h3>
+                                <p class="room-type">Standard</p>
+                            </div>
+                            <span class="room-status-badge available">Disponível</span>
+                        </div>
+                        <div class="room-card-body">
+                            <div class="room-info-item">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                                    <circle cx="9" cy="7" r="4"></circle>
+                                </svg>
+                                <span>2 pessoas</span>
+                            </div>
+                            <div class="room-info-item">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+                                    <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+                                </svg>
+                                <span>1 cama de casal</span>
+                            </div>
+                            <div class="room-price">R$ 350,00 <span>/noite</span></div>
+                        </div>
+                        <div class="room-card-footer">
+                            <button class="btn-secondary" onclick="editRoom(1)">Editar</button>
+                            <button class="btn-danger" onclick="deleteRoom(1)">Excluir</button>
+                        </div>
+                    </div>
+
+                    <div class="room-card occupied">
+                        <div class="room-card-header">
+                            <div>
+                                <h3>Quarto 102</h3>
+                                <p class="room-type">Standard</p>
+                            </div>
+                            <span class="room-status-badge occupied">Ocupado</span>
+                        </div>
+                        <div class="room-card-body">
+                            <div class="room-info-item">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                                    <circle cx="9" cy="7" r="4"></circle>
+                                </svg>
+                                <span>2 pessoas</span>
+                            </div>
+                            <div class="room-info-item">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+                                    <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+                                </svg>
+                                <span>2 camas de solteiro</span>
+                            </div>
+                            <div class="room-price">R$ 350,00 <span>/noite</span></div>
+                        </div>
+                        <div class="room-card-footer">
+                            <button class="btn-secondary" onclick="editRoom(2)">Editar</button>
+                            <button class="btn-danger" onclick="deleteRoom(2)">Excluir</button>
+                        </div>
+                    </div>
+
+                    <div class="room-card available">
+                        <div class="room-card-header">
+                            <div>
+                                <h3>Quarto 201</h3>
+                                <p class="room-type">Deluxe</p>
+                            </div>
+                            <span class="room-status-badge available">Disponível</span>
+                        </div>
+                        <div class="room-card-body">
+                            <div class="room-info-item">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                                    <circle cx="9" cy="7" r="4"></circle>
+                                </svg>
+                                <span>3 pessoas</span>
+                            </div>
+                            <div class="room-info-item">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+                                    <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+                                </svg>
+                                <span>1 cama king size</span>
+                            </div>
+                            <div class="room-price">R$ 550,00 <span>/noite</span></div>
+                        </div>
+                        <div class="room-card-footer">
+                            <button class="btn-secondary" onclick="editRoom(3)">Editar</button>
+                            <button class="btn-danger" onclick="deleteRoom(3)">Excluir</button>
+                        </div>
+                    </div>
+
+                    <div class="room-card maintenance">
+                        <div class="room-card-header">
+                            <div>
+                                <h3>Quarto 202</h3>
+                                <p class="room-type">Deluxe</p>
+                            </div>
+                            <span class="room-status-badge maintenance">Manutenção</span>
+                        </div>
+                        <div class="room-card-body">
+                            <div class="room-info-item">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                                    <circle cx="9" cy="7" r="4"></circle>
+                                </svg>
+                                <span>3 pessoas</span>
+                            </div>
+                            <div class="room-info-item">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+                                    <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+                                </svg>
+                                <span>1 cama king size</span>
+                            </div>
+                            <div class="room-price">R$ 550,00 <span>/noite</span></div>
+                        </div>
+                        <div class="room-card-footer">
+                            <button class="btn-secondary" onclick="editRoom(4)">Editar</button>
+                            <button class="btn-danger" onclick="deleteRoom(4)">Excluir</button>
+                        </div>
+                    </div>
+
+                    <div class="room-card occupied">
+                        <div class="room-card-header">
+                            <div>
+                                <h3>Suite 301</h3>
+                                <p class="room-type">Suite Premium</p>
+                            </div>
+                            <span class="room-status-badge occupied">Ocupado</span>
+                        </div>
+                        <div class="room-card-body">
+                            <div class="room-info-item">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                                    <circle cx="9" cy="7" r="4"></circle>
+                                </svg>
+                                <span>4 pessoas</span>
+                            </div>
+                            <div class="room-info-item">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+                                    <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+                                </svg>
+                                <span>2 camas king size</span>
+                            </div>
+                            <div class="room-price">R$ 850,00 <span>/noite</span></div>
+                        </div>
+                        <div class="room-card-footer">
+                            <button class="btn-secondary" onclick="editRoom(5)">Editar</button>
+                            <button class="btn-danger" onclick="deleteRoom(5)">Excluir</button>
+                        </div>
+                    </div>
+
+                    <div class="room-card available">
+                        <div class="room-card-header">
+                            <div>
+                                <h3>Suite 302</h3>
+                                <p class="room-type">Suite Premium</p>
+                            </div>
+                            <span class="room-status-badge available">Disponível</span>
+                        </div>
+                        <div class="room-card-body">
+                            <div class="room-info-item">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                                    <circle cx="9" cy="7" r="4"></circle>
+                                </svg>
+                                <span>4 pessoas</span>
+                            </div>
+                            <div class="room-info-item">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+                                    <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+                                </svg>
+                                <span>2 camas king size</span>
+                            </div>
+                            <div class="room-price">R$ 850,00 <span>/noite</span></div>
+                        </div>
+                        <div class="room-card-footer">
+                            <button class="btn-secondary" onclick="editRoom(6)">Editar</button>
+                            <button class="btn-danger" onclick="deleteRoom(6)">Excluir</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Analytics Page -->
+            <div id="analyticsPage" class="page">
+                <div class="page-header">
+                    <div>
+                        <h1>Análises e Relatórios</h1>
+                        <p>Visualize métricas e desempenho do hotel</p>
+                    </div>
+                    <select class="filter-select">
+                        <option>Últimos 7 dias</option>
+                        <option>Últimos 30 dias</option>
+                        <option>Últimos 3 meses</option>
+                        <option>Último ano</option>
+                    </select>
+                </div>
+
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon green">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <line x1="12" y1="1" x2="12" y2="23"></line>
+                                <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+                            </svg>
+                        </div>
+                        <div class="stat-content">
+                            <p class="stat-label">Receita Total</p>
+                            <h3 class="stat-value">R$ 487.5K</h3>
+                            <span class="stat-change positive">+18.2% vs. mês anterior</span>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon blue">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline>
+                                <polyline points="17 6 23 6 23 12"></polyline>
+                            </svg>
+                        </div>
+                        <div class="stat-content">
+                            <p class="stat-label">Taxa Média Diária</p>
+                            <h3 class="stat-value">R$ 625,00</h3>
+                            <span class="stat-change positive">+7.5% vs. mês anterior</span>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon yellow">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+                                <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+                                <line x1="12" y1="22.08" x2="12" y2="12"></line>
+                            </svg>
+                        </div>
+                        <div class="stat-content">
+                            <p class="stat-label">RevPAR</p>
+                            <h3 class="stat-value">R$ 546,88</h3>
+                            <span class="stat-change positive">+12.3% vs. mês anterior</span>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon purple">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="12" cy="7" r="4"></circle>
+                            </svg>
+                        </div>
+                        <div class="stat-content">
+                            <p class="stat-label">Novos Hóspedes</p>
+                            <h3 class="stat-value">156</h3>
+                            <span class="stat-change positive">+24.1% vs. mês anterior</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="content-grid">
+                    <div class="card large">
+                        <div class="card-header">
+                            <h3>Receita Mensal</h3>
+                        </div>
+                        <div class="chart-container">
+                            <svg viewBox="0 0 800 300" class="line-chart">
+                                <polyline
+                                    fill="none"
+                                    stroke="#52b788"
+                                    stroke-width="3"
+                                    points="50,250 150,200 250,180 350,150 450,120 550,100 650,80 750,60"
+                                />
+                                <circle cx="50" cy="250" r="5" fill="#1d5c3f"/>
+                                <circle cx="150" cy="200" r="5" fill="#1d5c3f"/>
+                                <circle cx="250" cy="180" r="5" fill="#1d5c3f"/>
+                                <circle cx="350" cy="150" r="5" fill="#1d5c3f"/>
+                                <circle cx="450" cy="120" r="5" fill="#1d5c3f"/>
+                                <circle cx="550" cy="100" r="5" fill="#1d5c3f"/>
+                                <circle cx="650" cy="80" r="5" fill="#1d5c3f"/>
+                                <circle cx="750" cy="60" r="5" fill="#1d5c3f"/>
+                            </svg>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Tipos de Quarto Mais Reservados</h3>
+                        </div>
+                        <div class="chart-list">
+                            <div class="chart-list-item">
+                                <div class="chart-list-label">
+                                    <span>Suite Premium</span>
+                                    <span>45%</span>
+                                </div>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 45%; background: #1d5c3f;"></div>
+                                </div>
+                            </div>
+                            <div class="chart-list-item">
+                                <div class="chart-list-label">
+                                    <span>Deluxe</span>
+                                    <span>30%</span>
+                                </div>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 30%; background: #52b788;"></div>
+                                </div>
+                            </div>
+                            <div class="chart-list-item">
+                                <div class="chart-list-label">
+                                    <span>Standard</span>
+                                    <span>25%</span>
+                                </div>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 25%; background: #95d5b2;"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="content-grid">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Origem das Reservas</h3>
+                        </div>
+                        <div class="chart-list">
+                            <div class="chart-list-item">
+                                <div class="chart-list-label">
+                                    <span>Site Direto</span>
+                                    <span>52%</span>
+                                </div>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 52%; background: #1d5c3f;"></div>
+                                </div>
+                            </div>
+                            <div class="chart-list-item">
+                                <div class="chart-list-label">
+                                    <span>Booking.com</span>
+                                    <span>28%</span>
+                                </div>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 28%; background: #52b788;"></div>
+                                </div>
+                            </div>
+                            <div class="chart-list-item">
+                                <div class="chart-list-label">
+                                    <span>Airbnb</span>
+                                    <span>15%</span>
+                                </div>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 15%; background: #95d5b2;"></div>
+                                </div>
+                            </div>
+                            <div class="chart-list-item">
+                                <div class="chart-list-label">
+                                    <span>Outros</span>
+                                    <span>5%</span>
+                                </div>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 5%; background: #b7e4c7;"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Avaliações dos Hóspedes</h3>
+                        </div>
+                        <div class="rating-summary">
+                            <div class="rating-score">
+                                <h2>4.8</h2>
+                                <div class="stars">
+                                    <span>★★★★★</span>
+                                </div>
+                                <p>Baseado em 1,247 avaliações</p>
+                            </div>
+                            <div class="rating-breakdown">
+                                <div class="rating-item">
+                                    <span>Limpeza</span>
+                                    <div class="rating-bar">
+                                        <div style="width: 96%; background: #1d5c3f;"></div>
+                                    </div>
+                                    <span>4.8</span>
+                                </div>
+                                <div class="rating-item">
+                                    <span>Conforto</span>
+                                    <div class="rating-bar">
+                                        <div style="width: 94%; background: #1d5c3f;"></div>
+                                    </div>
+                                    <span>4.7</span>
+                                </div>
+                                <div class="rating-item">
+                                    <span>Localização</span>
+                                    <div class="rating-bar">
+                                        <div style="width: 98%; background: #1d5c3f;"></div>
+                                    </div>
+                                    <span>4.9</span>
+                                </div>
+                                <div class="rating-item">
+                                    <span>Atendimento</span>
+                                    <div class="rating-bar">
+                                        <div style="width: 96%; background: #1d5c3f;"></div>
+                                    </div>
+                                    <span>4.8</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Guest Modal -->
+    <div id="guestModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Novo Hóspede</h2>
+                <button class="modal-close" onclick="closeGuestModal()">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+            <form class="modal-form">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Nome Completo</label>
+                        <input type="text" placeholder="Digite o nome completo" required>
+                    </div>
+                    <div class="form-group">
+                        <label>CPF</label>
+                        <input type="text" placeholder="000.000.000-00" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" placeholder="email@exemplo.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Telefone</label>
+                        <input type="tel" placeholder="(00) 00000-0000" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Data de Nascimento</label>
+                        <input type="date" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Nacionalidade</label>
+                        <input type="text" placeholder="Brasileiro" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Endereço</label>
+                    <input type="text" placeholder="Rua, número, bairro, cidade - UF" required>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn-secondary" onclick="closeGuestModal()">Cancelar</button>
+                    <button type="submit" class="btn-primary">Salvar Hóspede</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Reservation Modal -->
+    <div id="reservationModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Nova Reserva</h2>
+                <button class="modal-close" onclick="closeReservationModal()">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+            <form class="modal-form">
+                <div class="form-group">
+                    <label>Hóspede</label>
+                    <select required>
+                        <option value="">Selecione um hóspede</option>
+                        <option>Maria Clara Silva</option>
+                        <option>João Santos</option>
+                        <option>Ana Paula Costa</option>
+                        <option>Ricardo Ferreira</option>
+                        <option>Luciana Martins</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Quarto</label>
+                    <select required>
+                        <option value="">Selecione um quarto</option>
+                        <option>Quarto 101 - Standard</option>
+                        <option>Quarto 201 - Deluxe</option>
+                        <option>Suite 301 - Premium</option>
+                        <option>Suite 302 - Premium</option>
+                    </select>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Check-in</label>
+                        <input type="date" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Check-out</label>
+                        <input type="date" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Número de Hóspedes</label>
+                        <input type="number" min="1" placeholder="1" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Status</label>
+                        <select required>
+                            <option>Confirmada</option>
+                            <option>Pendente</option>
+                            <option>Cancelada</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Observações</label>
+                    <textarea rows="3" placeholder="Observações adicionais sobre a reserva"></textarea>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn-secondary" onclick="closeReservationModal()">Cancelar</button>
+                    <button type="submit" class="btn-primary">Criar Reserva</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Room Modal -->
+    <div id="roomModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Novo Quarto</h2>
+                <button class="modal-close" onclick="closeRoomModal()">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+            <form class="modal-form">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Número do Quarto</label>
+                        <input type="text" placeholder="Ex: 101" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Tipo</label>
+                        <select required>
+                            <option>Standard</option>
+                            <option>Deluxe</option>
+                            <option>Suite Premium</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Capacidade</label>
+                        <input type="number" min="1" placeholder="2" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Valor por Noite</label>
+                        <input type="text" placeholder="R$ 0,00" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Tipo de Cama</label>
+                    <select required>
+                        <option>1 cama de casal</option>
+                        <option>2 camas de solteiro</option>
+                        <option>1 cama king size</option>
+                        <option>2 camas king size</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Status</label>
+                    <select required>
+                        <option>Disponível</option>
+                        <option>Ocupado</option>
+                        <option>Manutenção</option>
+                        <option>Limpeza</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Descrição</label>
+                    <textarea rows="3" placeholder="Descrição e comodidades do quarto"></textarea>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn-secondary" onclick="closeRoomModal()">Cancelar</button>
+                    <button type="submit" class="btn-primary">Salvar Quarto</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

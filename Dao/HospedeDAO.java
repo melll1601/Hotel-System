@@ -17,7 +17,6 @@ public class HospedeDAO {
         Hospede novoHospede = new Hospede(contadorId, nome, documento, telefone);
         listaHospedes.add(novoHospede);
         contadorId++;
-        System.out.println("Sucesso: Hóspede cadastrado!");
     }
 
     public static Hospede buscarPorId(int id) {

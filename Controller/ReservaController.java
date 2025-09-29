@@ -68,7 +68,7 @@ public class ReservaController {
 
         List<Model.Reserva> reservas = Dao.ReservaDAO.listarReservas();
         if (reservas.isEmpty()) {
-            System.out.println("|        Nenhuma reserva cadastrada!       |");
+            System.out.println("|            Nenhuma reserva cadastrada!               |");
 
         } else {
 

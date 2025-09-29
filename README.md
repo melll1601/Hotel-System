@@ -1,196 +1,60 @@
-# 🏨 Sistema de Gestão de Hotel
+# 🏨✨ FrontEnd Conceitual do Sistema de Hotel
 
-**Projeto Avaliativo – Prova Prática de Programação Orientada a Objetos (Java, JDBC e MySQL)**
+Esta seção apresenta a **camada visual** do sistema, representando a interface para interação com hóspedes, quartos, reservas e serviços.  
 
-Este sistema foi desenvolvido para gerenciar um hotel, permitindo o cadastro de hóspedes, quartos, reservas e serviços, utilizando Java com JDBC para integração ao banco de dados MySQL.
-
----
-
-## 📖 Funcionalidades
-
-### Cadastro
-- ➕ Cadastrar Hóspede (nome, documento, telefone)  
-- ➕ Cadastrar Quarto (número, tipo, preço)  
-- ➕ Cadastrar Reserva (hóspede, quarto, data de entrada e saída)  
-
-### Listagem
-- 📋 Listar todos os hóspedes  
-- 📋 Listar todos os quartos  
-- 📋 Listar todas as reservas  
-
-### Pesquisa
-- 🔍 Pesquisar hóspede por nome  
-- 🔍 Pesquisar quarto por tipo  
-- 🔍 Pesquisar reserva por nome do hóspede  
-
-### Edição e Exclusão
-- ✏ Editar dados de um hóspede  
-- ❌ Cancelar uma reserva  
-
-### Sistema
-- 🚪 Sair do sistema  
+As telas foram elaboradas como **protótipos visuais**, utilizando inteligência artificial para gerar uma **prévia de design**, facilitando a comunicação da ideia antes da implementação completa.
 
 ---
 
-## 🛠 Estrutura do Projeto
-
-```text
-src/
-├── model/       # Classes de modelo (Hóspede, Quarto, Reserva, Serviço, Pessoa)
-├── dao/         # Classes de acesso ao banco (JDBC: CRUD com SQL)
-├── service/     # Regras de negócio (validações, lógica)
-├── view/        # Interface de interação com o usuário (menus)
-└── Main.java    # Ponto de entrada do sistema
-```
-
-## 📂 Classes Principais
-
-- **Pessoa** (classe abstrata) → atributos e métodos comuns  
-- **Hóspede** → herda de Pessoa e representa o cliente  
-- **Quarto** → dados sobre cada quarto disponível no hotel  
-- **Reserva** → ligação entre Hóspede, Quarto e Serviço  
-- **Serviço** → serviços adicionais (café da manhã, lavanderia, etc.)  
-- **DAO** → classes responsáveis pelo CRUD no banco de dados via JDBC  
+## ⚠️ Status
+Versão inicial e **conceitual**, servindo apenas como referência visual.  
+Não é funcional, mas ajuda a planejar a experiência do usuário e a interface final.
 
 ---
 
-## 💡 Conceitos Aplicados
+## 🏩 Sistema de Gestão de Hotel
 
-- **POO**: Classes, Objetos, Encapsulamento, Herança e Polimorfismo  
-- **JDBC**: Conexão Java ↔ MySQL com PreparedStatements  
-- **DAO**: Organização do acesso ao banco  
-- **List<T>**: Armazenamento temporário de objetos  
-- **Construtores**: Com e sem parâmetros  
-- **toString()**: Exibição formatada de objetos  
-- **Tratamento de Erros**: try/catch para SQL e entradas inválidas  
-- **Submenus**: Menus específicos para cada operação  
-- **Agregação**: Reserva contendo Serviço  
+**Projeto Avaliativo – Prova Prática de Programação Orientada a Objetos (Java, JDBC e MySQL)**  
 
----
+O sistema gerencia:
+- 🧑‍💼 Hóspedes
+- 🛏️ Quartos
+- 📅 Reservas
+- 🛎️ Serviços (apenas na main)
 
-## ⚙️ Configuração do Banco de Dados (Docker + MySQL)
-
-- Certifique-se de que o **Docker esteja rodando** antes de subir o container do MySQL.  
-- A senha do usuário root do banco é: `mysqlPW`.  
-- O banco criado automaticamente pelo Docker é `mysqlDB`, mas o script SQL do projeto cria `SistemaHotel`.  
-- Para que o Java consiga se conectar corretamente:  
-  - O container MySQL deve estar ativo.  
-  - A porta `3306` deve estar liberada e não estar sendo usada por outro serviço.  
-  - Conexões externas ao banco são liberadas pelo comando:  
-    ```sql
-    UPDATE mysql.user SET host='%' WHERE user='root';
-    FLUSH PRIVILEGES;
-    ```
-- Caso haja problemas de conexão, verifique:  
-  - Se o container está rodando (`docker ps`)  
-  - Se a URL do JDBC está correta (`jdbc:mysql://localhost:3306/SistemaHotel`)  
-  - Se o usuário e senha batem com o especificado (`root` / `mysqlPW`)  
+A integração com o banco de dados MySQL é feita via Java com JDBC.
 
 ---
 
-### 1. Criar pasta para o MySQL
-```bash
-mkdir mysql
-```
+## 🎯 Objetivo do FrontEnd Conceitual
 
-```bash
-cd mysql
-```
-
-### 2. Criar arquivo `docker-compose.yml`
-```yaml
-version: '3.8'
-
-services:
-  db:
-    image: mysql/mysql-server:latest
-    container_name: my-mysql
-    restart: always
-    environment:
-      - MYSQL_DATABASE=mysqlDB
-      - MYSQL_ROOT_PASSWORD=mysqlPW
-    ports:
-      - '3306:3306'
-    volumes:
-      - mysql-volume:/var/lib/mysql
-
-volumes:
-  mysql-volume:
-    driver: local
-```
-
-### Explicação dos parâmetros do Docker
-
-- `image` → imagem do MySQL usada  
-- `container_name` → nome do container  
-- `MYSQL_DATABASE` → banco criado automaticamente  
-- `MYSQL_ROOT_PASSWORD` → senha do usuário root  
-- `ports` → porta de acesso (3306)  
-- `volumes` → persistência dos dados  
+Mesmo sem execução real, este protótipo visual permite:
+- 🖼️ Planejar a disposição dos componentes
+- 🎨 Definir o estilo visual
+- 🧭 Antecipar a experiência do usuário
+- 🚀 Servir de guia para a implementação futura do FrontEnd
 
 ---
 
-### 3. Subir o container
-```bash
-docker-compose up -d
+## 🗂 Estrutura de Arquivos do FrontEnd
+
 ```
+/public
+└─ logo.png
+/index.html
+/styles.css
+/script.js
+/data.json
+```
+
+
+- **index.html** → Estrutura base das páginas  
+- **styles.css** → Estilos visuais e layout  
+- **script.js** → Funcionalidades simuladas (mockup)  
+- **data.json** → Dados de exemplo para ilustrar cadastros e reservas  
+- **public/logo.png** → Logo do sistema  
 
 ---
 
-### 4. Acessar o container
-```bash 
-docker exec -it my-mysql bash
-```
-
-### 5. Entrar no MySQL
-```bash
-mysql -u root -p
-```
-
-### 6. Liberar conexões externas
-```bash
-UPDATE mysql.user SET host='%' WHERE user='root';
-```
-
-```bash
-FLUSH PRIVILEGES;
-```
-
-## 📂 Script do Banco de Dados (MySQL Workbench)
-
-```sql
-CREATE DATABASE SistemaHotel;
-USE SistemaHotel;
-
-CREATE TABLE hospede (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    nome VARCHAR(150) NOT NULL,
-    documento VARCHAR(50) UNIQUE,
-    telefone VARCHAR(21)
-);
-
-CREATE TABLE quarto (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    numero INT NOT NULL,
-    tipo ENUM('simples', 'duplo', 'suite'),
-    preco DECIMAL(10,2) NOT NULL
-);
-
-CREATE TABLE reserva (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    quarto_id INT NOT NULL,
-    hospede_id INT NOT NULL,
-    data_entrada DATE NOT NULL,
-    data_saida DATE NOT NULL,
-    FOREIGN KEY (quarto_id) REFERENCES quarto(id),
-    FOREIGN KEY (hospede_id) REFERENCES hospede(id)
-);
-
-CREATE TABLE servico (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    reserva_id INT NOT NULL,
-    tipo ENUM('cafe_da_manha', 'lavanderia', 'spa', 'academia'),
-    preco DECIMAL(10,2) NOT NULL,
-    FOREIGN KEY (reserva_id) REFERENCES reserva(id)
-);
-```
+## 🎬 Vídeo do Sistema
+![Hotel Sistema](./public/hotelVideo.gif)
